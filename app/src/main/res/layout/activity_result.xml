@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white" >
+
+    <LinearLayout
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/border4" >
+
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="240dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:background="#B4CFEC">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp" >
+
+                <TextView
+                    android:id="@+id/scoreboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="SCORE\n\n 1000 OF 5400"
+                    android:textStyle="normal"
+                    android:textColor="#FFFFFF"
+                    android:padding="8dp"
+                    android:background="@drawable/border2"/>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/questionsCorrect"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="WORDS YOU GOT RIGHT\n\n3 OF 10"
+                    android:textStyle="normal"
+                    android:textColor="#FFFFFF"
+                    android:padding="8dp"
+                    android:background="@drawable/border3"/>
+
+            </TableRow>
+
+
+        </TableLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/replay_quiz"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
+        android:text="REPLAY QUIZ>"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/review_answers"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
+        android:text="REVIEW ANSWERS>"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/exit_quiz"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:minHeight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_gravity="center"
+        android:text="EXIT QUIZ>"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

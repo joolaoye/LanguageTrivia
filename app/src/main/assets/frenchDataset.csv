@@ -1,0 +1,51 @@
+word,option1,option2,option3,option4,answer
+chat,dog,cat,elephant,rabbit,cat
+maison,house,tree,river,car,house
+jaune,blue,green,yellow,red,yellow
+école,beach,library,park,school,school
+pomme,banana,orange,apple,grape,apple
+livre,pen,pencil,book,notebook,book
+soleil,moon,sun,star,cloud,sun
+eau,air,fire,water,earth,water
+rouge,blue,green,red,yellow,red
+porte,window,door,wall,floor,door
+chaise,table,chair,sofa,bed,chair
+tableau,table,chair,sofa,bed,table
+chaussure,hat,sock,shoe,glove,shoe
+orange,banana,orange,apple,grape,orange
+fleur,tree,flower,grass,bush,flower
+banane,banana,orange,apple,grape,banana
+lumière,light,shadow,sun,moon,light
+nuit,day,noon,night,evening,night
+pierre,rock,stone,sand,pebble,stone
+terre,sky,water,earth,fire,earth
+vent,rain,snow,wind,storm,wind
+homme,woman,child,man,elderly man,man
+femme,man,woman,child,elderly woman,woman
+enfant,adult,teenager,child,baby,child
+ami,enemy,stranger,friend,companion,friend
+famille,stranger,neighbor,family,friend,family
+ville,town,country,city,village,city
+fruit,vegetable,meat,fruit,dessert,fruit
+mois,days,weeks,months,years,months
+jour,night,noon,day,morning,day
+temps,space,time,weather,season,time
+semaine,day,month,week,year,week
+mois,days,weeks,months,years,months
+année,month,week,year,decade,year
+jeune,old,young,teenager,adult,young
+vieux,adult,young,teenager,old,old
+bien,maybe,good,no,yes,good
+mal,good,okay,bad,worse,bad
+grand,small,medium,big,huge,big
+petit,small,medium,big,huge,small
+rapide,slow,medium,fast,very fast,fast
+lent,fast,medium,slow,very slow,slow
+haut,short,average,tall,very tall,tall
+bas,tall,average,short,very short,short
+riche,poor,average,rich,wealthy,rich
+pauvre,rich,average,poor,destitute,poor
+heureux,sad,neutral,happy,joyful,happy
+triste,happy,neutral,sad,miserable,sad
+malade,healthy,sick,unwell,ill,ill
+sain,ill,unwell,sick,healthy,healthy
