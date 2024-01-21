@@ -1,7 +1,7 @@
 
 
 <p align="center">
-<a href="https://github.com/joolaoye/PyCHESS/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"/></a> &nbsp; <a href=""><img src="https://img.shields.io/badge/Open Source-red.svg"/></a> &nbsp; <a href="https://github.com/joolaoye/PyCHESS/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/Contributors-green.svg"/></a> &nbsp; <a href="https://github.com/joolaoye/PyCHESS/blob/main/DEMO.md"><img src="https://img.shields.io/badge/Built for Android-orange.svg"/></a>
+<a href="https://github.com/joolaoye/LanguageTrivia/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"/></a> &nbsp; <a href=""><img src="https://img.shields.io/badge/Open Source-red.svg"/></a> &nbsp; <a href="https://github.com/joolaoye/LanguageTrivia/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/Contributors-green.svg"/></a> &nbsp; <a href=""><img src="https://img.shields.io/badge/Built for Android-orange.svg"/></a>
 </p>
 
 ## Table of Contents
