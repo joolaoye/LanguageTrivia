@@ -18,8 +18,8 @@ This project provides an entertaining and educational experience through timed q
 ## Gameplay
 
 <p align="center">
-  <a href="https://i.imgur.com/3QAm4t5.gif">
-    <img src="https://i.imgur.com/3QAm4t5.gif" alt="Preview" width="25%"/>
+  <a href="https://i.imgur.com/kpNbdHQ.gif">
+    <img src="https://i.imgur.com/kpNbdHQ.gif" alt="Preview" width="25%"/>
   </a>
 </p>
 
