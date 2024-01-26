@@ -167,6 +167,8 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
                 timerTextView.text = spannableString
 
+                answers.add(Answered(currentQuestion.word, "Did not answer", currentQuestion.answer, false))
+
                 selectedOption()
             }
         }
