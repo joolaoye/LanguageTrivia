@@ -19,7 +19,7 @@ This project provides an entertaining and educational experience through timed q
 
 <p align="center">
   <a href="https://i.imgur.com/kpNbdHQ.gif">
-    <img src="https://i.imgur.com/kpNbdHQ.gif" alt="Preview" width="25%"/>
+    <img src="https://i.imgur.com/kpNbdHQ.gif" alt="Gameplay" width="25%"/>
   </a>
 </p>
 
