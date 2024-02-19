@@ -1,23 +1,19 @@
-
-
 <p align="center">
 <a href="https://github.com/joolaoye/LanguageTrivia/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg"/></a> &nbsp; <a href=""><img src="https://img.shields.io/badge/Open Source-red.svg"/></a> &nbsp; <a href="https://github.com/joolaoye/LanguageTrivia/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/Contributors-green.svg"/></a> &nbsp; <a href=""><img src="https://img.shields.io/badge/Built for Android-orange.svg"/></a>
 </p>
 
-## Table of Contents
-- [About](#about)
-- [Gameplay](#gameplay)
-- [Installation](#installation)
-
-## About
-
-An Android trivia game focused on language learning, offering users a choice between French, German, and Spanish. 
-<br><br>
-This project provides an entertaining and educational experience through timed quizzes, engaging users in an intellectually stimulating journey to expand their language proficiency.
-
-## Gameplay
-
 <p align="center">
+  <img src="https://i.imgur.com/CshzkhT.png">
+</p>
+
+
+# ✍️ About
+
+${\textsf{\color{Cyan}Language Warrior}}$ is a trivia game focused on language learning, offering users a choice between French, German, and Spanish. 
+
+# 📺 Gameplay
+
+<p>
   <a href="https://i.imgur.com/kpNbdHQ.gif">
     <img src="https://i.imgur.com/kpNbdHQ.gif" alt="Gameplay" width="25%"/>
   </a>
@@ -25,14 +21,21 @@ This project provides an entertaining and educational experience through timed q
 
 <br><br>
 
-## Installation
-Coming soon...
+# 🛠️ Features
+
+- Offers French, German and Spanish
+- 10 seconds timer on each question
+- Option to review answers
+
+# 📱 Installation
+
+Not yet released on the Google Playstore
+
 
 <h3 align="center">
   Built With
 </h3>
 
 <p align="center">
-<a href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"><img  alt="Kotlin" width="50px"  style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" /></a> <a href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg"><img  alt="Android Studio" width="50px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/androidstudio/androidstudio-original.svg" />
+<a href="https://kotlinlang.org/"><img  alt="Kotlin" width="50px"  style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" /></a> 
 </p>
-<br><br>
