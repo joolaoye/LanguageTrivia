@@ -1,12 +1,12 @@
-package com.example.quizapp
+package com.example.LinguaWarrior
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.quizapp.ui.QuestionsActivity
+import com.example.LinguaWarrior.ui.QuestionsActivity
 import android.content.Intent
-import com.example.quizapp.ui.InformationActivity
-import com.example.quizapp.utils.Constants
+import com.example.LinguaWarrior.ui.InformationActivity
+import com.example.LinguaWarrior.utils.Constants
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

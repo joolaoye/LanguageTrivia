@@ -1,4 +1,4 @@
-package com.example.quizapp.model
+package com.example.LinguaWarrior.model
 
 data class Question (
     var word: String,

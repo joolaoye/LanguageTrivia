@@ -1,4 +1,4 @@
-package com.example.quizapp
+package com.example.LinguaWarrior
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.quizapp.ui
+package com.example.LinguaWarrior.ui
 
 import android.content.Intent
 import android.graphics.Color
@@ -10,14 +10,14 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
-import com.example.quizapp.R
-import com.example.quizapp.model.Question
-import com.example.quizapp.utils.Constants
+import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.model.Question
+import com.example.LinguaWarrior.utils.Constants
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.example.quizapp.model.Answered
+import com.example.LinguaWarrior.model.Answered
 import kotlin.random.Random
 import kotlin.system.exitProcess
 

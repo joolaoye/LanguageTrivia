@@ -1,8 +1,8 @@
-package com.example.quizapp.utils
+package com.example.LinguaWarrior.utils
 
 import android.content.Context
-import com.example.quizapp.model.Answered
-import com.example.quizapp.model.Question
+import com.example.LinguaWarrior.model.Answered
+import com.example.LinguaWarrior.model.Question
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import kotlin.system.exitProcess

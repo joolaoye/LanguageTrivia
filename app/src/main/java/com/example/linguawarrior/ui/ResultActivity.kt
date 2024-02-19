@@ -1,13 +1,13 @@
-package com.example.quizapp.ui
+package com.example.LinguaWarrior.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.quizapp.MainActivity
-import com.example.quizapp.utils.Constants
-import com.example.quizapp.R
+import com.example.LinguaWarrior.MainActivity
+import com.example.LinguaWarrior.utils.Constants
+import com.example.LinguaWarrior.R
 import kotlin.system.exitProcess
 
 class ResultActivity : AppCompatActivity(), View.OnClickListener {
