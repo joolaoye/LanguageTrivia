@@ -1,5 +1,6 @@
 package com.example.linguawarrior.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,9 +24,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.ui.components.SelectOption
 
-@Preview
 @Composable
 fun QuestionScreen(
     modifier: Modifier = Modifier
@@ -43,6 +44,7 @@ fun QuestionScreen(
 
 @Composable
 fun QuestionView(
+    question: Question,
     modifier: Modifier = Modifier
 ) {
     val mediumPadding = dimensionResource(id = R.dimen.padding_medium)
@@ -55,21 +57,24 @@ fun QuestionView(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = "Pick the best option that translates the word to English",
+            text = stringResource(R.string.pick_the_best_option),
             style = MaterialTheme.typography.bodyMedium
         )
 
         Text(
-            text = "havoc",
+            text = question.word,
             style = MaterialTheme.typography.titleLarge
         )
 
-        QuestionOptions()
+        QuestionOptions(
+            optionList = question.options
+        )
     }
 }
 
 @Composable
 fun QuestionOptions(
+    optionList : List<Int>,
     modifier: Modifier = Modifier
 ) {
     val mediumPadding = dimensionResource(id = R.dimen.padding_large)
@@ -78,16 +83,17 @@ fun QuestionOptions(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(mediumPadding)
     ) {
-        SelectOption(option = "despair")
-        SelectOption(option = "anger")
-        SelectOption(option = "loyalty")
-        SelectOption(option = "confusion")
+        optionList.forEach {option ->
+            SelectOption(option = option)
+        }
     }
 }
 
-@Preview
 @Composable
 fun TopAppBar(
+    @StringRes questionNumber : Int,
+    @StringRes time : Int,
+    @StringRes score: Int,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -105,17 +111,17 @@ fun TopAppBar(
 
         LabelAndTextColumn(
             label = "QUESTION",
-            text = "1/10"
+            text = stringResource(id = questionNumber)
         )
 
         LabelAndTextColumn(
             label = "TIME",
-            text = ":05"
+            text = stringResource(id = time)
         )
 
         LabelAndTextColumn(
             label = "SCORE",
-            text = "100"
+            text = stringResource(id = score)
         )
     }
 }

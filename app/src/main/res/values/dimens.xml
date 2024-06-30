@@ -5,6 +5,7 @@
     <dimen name="border_medium">12dp</dimen>
     <dimen name="border_large">16dp</dimen>
 
+    <dimen name="padding_extraSmall">4dp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="padding_large">32dp</dimen>

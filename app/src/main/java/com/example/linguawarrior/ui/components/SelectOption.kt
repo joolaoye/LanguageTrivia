@@ -17,7 +17,7 @@ import com.example.LinguaWarrior.R
 
 @Composable
 fun SelectOption(
-    option : String,
+    @StringRes option : Int,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -32,7 +32,7 @@ fun SelectOption(
                 .padding(dimensionResource(id = R.dimen.padding_medium))
         ) {
             Text(
-                text = option,
+                text = stringResource(id = option),
                 style = MaterialTheme.typography.bodyMedium
             )
         }

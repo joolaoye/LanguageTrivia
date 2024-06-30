@@ -1,12 +1,11 @@
 package com.example.LinguaWarrior.model
 
+import androidx.annotation.StringRes
+
 data class Question (
-    var word: String,
-    var option1: String,
-    var option2: String,
-    var option3: String,
-    var option4: String,
-    var answer: String
+    val word: String,
+    val options : List<String>,
+    val answer : String
 )
 
 data class Answered (
