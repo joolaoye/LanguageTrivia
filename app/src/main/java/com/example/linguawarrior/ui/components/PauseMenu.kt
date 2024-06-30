@@ -4,9 +4,12 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -21,40 +24,46 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 
 
-@Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PauseMenu(
     modifier: Modifier = Modifier
 ) {
     AlertDialog(
+        modifier = modifier,
         onDismissRequest = { /*TODO*/ },
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = "TRIVIA PAUSED",
-                style = MaterialTheme.typography.titleLarge
-            )
+        Card {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.padding_medium))
+            ) {
+                Text(
+                    text = stringResource(R.string.trivia_paused),
+                    style = MaterialTheme.typography.titleLarge
+                )
 
-            TextButtonGroup()
+                TextButtonGroup()
 
-            RowWithTextAndSwitch(
-                icon = Icons.Filled.VolumeUp,
-                iconDescription = R.string.play,
-                text = R.string.pause,
-                checked = true,
-                onCheckedChanged = {}
-            )
+                RowWithTextAndSwitch(
+                    icon = Icons.Filled.VolumeUp,
+                    iconDescription = R.string.toggle_audio,
+                    text = R.string.audio,
+                    checked = true,
+                    onCheckedChanged = {}
+                )
+            }
+
         }
     }
 }
 
-@Preview(showBackground = true)
 @Composable
 fun TextButtonGroup(
     modifier: Modifier = Modifier
@@ -66,21 +75,21 @@ fun TextButtonGroup(
     ) {
         TextButton(onClick = { /*TODO*/ }) {
             Text(
-                text = "RESUME",
+                text = stringResource(R.string.resume),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
 
         TextButton(onClick = { /*TODO*/ }) {
             Text(
-                text = "NEW TRIVIA",
+                text = stringResource(R.string.new_trivia),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
 
         TextButton(onClick = { /*TODO*/ }) {
             Text(
-                text = "EXIT",
+                text = stringResource(R.string.exit),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -96,10 +105,9 @@ fun RowWithTextAndSwitch(
     onCheckedChanged : (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val mediumPadding = dimensionResource(id = R.dimen.padding_medium)
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(mediumPadding),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium)),
         modifier = modifier
     ) {
         Icon(
@@ -117,5 +125,13 @@ fun RowWithTextAndSwitch(
             onCheckedChange = onCheckedChanged
         )
 
+    }
+}
+
+@Preview
+@Composable
+fun PreviewPauseMenu() {
+    LinguaWarriorTheme {
+        PauseMenu()
     }
 }

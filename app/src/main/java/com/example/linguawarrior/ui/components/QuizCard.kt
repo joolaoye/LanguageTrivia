@@ -23,7 +23,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
+import com.example.linguawarrior.data.frenchQuestions
 
 @Composable
 fun QuizCard(
@@ -74,5 +77,16 @@ fun QuizCard(
                 style = MaterialTheme.typography.bodyMedium
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun QuizCardPreview() {
+    LinguaWarriorTheme {
+        QuizCard(
+            language = R.string.french,
+            image = R.drawable.pic0
+        )
     }
 }

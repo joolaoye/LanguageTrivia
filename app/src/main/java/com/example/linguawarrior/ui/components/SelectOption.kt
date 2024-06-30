@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 
 @Composable
 fun SelectOption(
@@ -34,5 +36,13 @@ fun SelectOption(
                 style = MaterialTheme.typography.bodyMedium
             )
         }
+    }
+}
+
+@Preview
+@Composable
+fun SelectOptionPreview() {
+    LinguaWarriorTheme {
+        SelectOption(option = "Test")
     }
 }

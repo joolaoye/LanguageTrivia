@@ -32,7 +32,7 @@ fun QuestionScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
+            TopBar(
                 questionNumber = "1",
                 time = ":05",
                 score = "100"
@@ -53,12 +53,11 @@ fun QuestionView(
     question: Question,
     modifier: Modifier = Modifier
 ) {
-    val mediumPadding = dimensionResource(id = R.dimen.padding_medium)
 
     Column(
         modifier = modifier
             .fillMaxHeight(0.7f)
-            .padding(mediumPadding),
+            .padding(dimensionResource(id = R.dimen.padding_medium)),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -83,11 +82,9 @@ fun QuestionOptions(
     optionList : List<String>,
     modifier: Modifier = Modifier
 ) {
-    val mediumPadding = dimensionResource(id = R.dimen.padding_large)
-
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(mediumPadding)
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
         optionList.forEach {option ->
             SelectOption(option = option)
@@ -96,7 +93,7 @@ fun QuestionOptions(
 }
 
 @Composable
-fun TopAppBar(
+fun TopBar(
     questionNumber : String,
     time : String,
     score: String,
@@ -116,17 +113,17 @@ fun TopAppBar(
         }
 
         LabelAndTextColumn(
-            label = "QUESTION",
+            label = stringResource(R.string.question),
             text = "$questionNumber/10"
         )
 
         LabelAndTextColumn(
-            label = "TIME",
+            label = stringResource(R.string.time),
             text = time
         )
 
         LabelAndTextColumn(
-            label = "SCORE",
+            label = stringResource(R.string.score),
             text = score
         )
     }

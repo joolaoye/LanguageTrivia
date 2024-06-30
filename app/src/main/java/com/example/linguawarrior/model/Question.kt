@@ -1,7 +1,5 @@
 package com.example.LinguaWarrior.model
 
-import androidx.annotation.StringRes
-
 data class Question (
     val word: String,
     val options : List<String>,

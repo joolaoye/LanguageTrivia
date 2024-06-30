@@ -12,28 +12,11 @@
         android:theme="@style/Theme.LinguaWarrior"
         tools:targetApi="31">
         <activity
-            android:name=".ui.QuestionsActivity"
-            android:exported="false"
-            android:theme="@style/Theme.LinguaWarrior.NoActionBar"/>
-        <activity
-            android:name=".ui.AnswersActivity"
-            android:exported="false"
-            android:theme="@style/Theme.LinguaWarrior.NoActionBar"/>
-        <activity
-            android:name=".ui.ResultActivity"
-            android:exported="false"
-            android:theme="@style/Theme.LinguaWarrior.NoActionBar"/>
-        <activity
-            android:name=".ui.InformationActivity"
-            android:exported="false"
-            android:theme="@style/Theme.LinguaWarrior.NoActionBar"/>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.LinguaWarrior.NoActionBar">
+            android:theme="@style/Theme.LinguaWarrior">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
