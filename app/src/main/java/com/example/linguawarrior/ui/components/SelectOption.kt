@@ -1,6 +1,5 @@
 package com.example.linguawarrior.ui.components
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,12 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
 
 @Composable
 fun SelectOption(
-    @StringRes option : Int,
+    option : String,
     modifier: Modifier = Modifier
 ) {
     Surface(
@@ -32,7 +30,7 @@ fun SelectOption(
                 .padding(dimensionResource(id = R.dimen.padding_medium))
         ) {
             Text(
-                text = stringResource(id = option),
+                text = option,
                 style = MaterialTheme.typography.bodyMedium
             )
         }

@@ -73,7 +73,7 @@ private val darkScheme = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(
+fun LinguaWarriorTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

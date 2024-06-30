@@ -29,7 +29,6 @@ import com.example.LinguaWarrior.R
 fun QuizCard(
     modifier: Modifier = Modifier,
     @StringRes language : Int,
-    @StringRes description: Int,
     @DrawableRes image : Int
 ) {
     Card(
@@ -71,7 +70,7 @@ fun QuizCard(
             )
 
             Text(
-                text = stringResource(id = description),
+                text = stringResource(id = R.string.how_strong, stringResource(id = language)),
                 style = MaterialTheme.typography.bodyMedium
             )
         }

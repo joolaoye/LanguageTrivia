@@ -3,4 +3,8 @@
     <string name="play">Play</string>
     <string name="pause">Pause</string>
     <string name="pick_the_best_option">Pick the best option that translates the highlighted word</string>
+    <string name="french">French</string>
+    <string name="spanish">Spanish</string>
+    <string name="german">German</string>
+    <string name="how_strong">How Strong is your %s? Play to find out</string>
 </resources>

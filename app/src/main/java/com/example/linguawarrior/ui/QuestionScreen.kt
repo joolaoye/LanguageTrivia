@@ -5,12 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -21,24 +19,32 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.ui.components.SelectOption
+import com.example.linguawarrior.data.frenchQuestions
 
+@Preview
 @Composable
 fun QuestionScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
-            TopAppBar()
+            TopAppBar(
+                questionNumber = "1",
+                time = ":05",
+                score = "100"
+            )
         }
     ) {
         paddingValues ->
 
-        QuestionView(modifier = Modifier.padding(paddingValues))
+        QuestionView(
+            question = frenchQuestions[0],
+            modifier = Modifier.padding(paddingValues)
+        )
     }
 }
 
@@ -74,7 +80,7 @@ fun QuestionView(
 
 @Composable
 fun QuestionOptions(
-    optionList : List<Int>,
+    optionList : List<String>,
     modifier: Modifier = Modifier
 ) {
     val mediumPadding = dimensionResource(id = R.dimen.padding_large)
@@ -91,9 +97,9 @@ fun QuestionOptions(
 
 @Composable
 fun TopAppBar(
-    @StringRes questionNumber : Int,
-    @StringRes time : Int,
-    @StringRes score: Int,
+    questionNumber : String,
+    time : String,
+    score: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -111,17 +117,17 @@ fun TopAppBar(
 
         LabelAndTextColumn(
             label = "QUESTION",
-            text = stringResource(id = questionNumber)
+            text = "$questionNumber/10"
         )
 
         LabelAndTextColumn(
             label = "TIME",
-            text = stringResource(id = time)
+            text = time
         )
 
         LabelAndTextColumn(
             label = "SCORE",
-            text = stringResource(id = score)
+            text = score
         )
     }
 }
@@ -146,7 +152,7 @@ fun LabelAndTextColumn(
 
         Text(
             text = text,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }

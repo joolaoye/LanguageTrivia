@@ -1,6 +1,8 @@
 package com.example.linguawarrior.data
 
+import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.model.Question
+import com.example.linguawarrior.model.QuizOption
 
 val frenchQuestions = listOf(
     Question("chat", listOf("dog", "cat", "elephant", "rabbit"), "cat"),
@@ -159,4 +161,25 @@ val spanishQuestions = listOf(
     Question("triste", listOf("happy", "neutral", "sad", "miserable"), "sad"),
     Question("enfermo", listOf("healthy", "sick", "unwell", "ill"), "ill"),
     Question("sano", listOf("ill", "unwell", "sick", "healthy"), "healthy")
+)
+
+
+val quizOptions = listOf(
+    QuizOption(
+        image = R.drawable.pic0,
+        language = R.string.french,
+        dataset = frenchQuestions
+    ),
+
+    QuizOption(
+        image = R.drawable.pic1,
+        language = R.string.german,
+        dataset = germanQuestions
+    ),
+
+    QuizOption(
+        image = R.drawable.pic2,
+        language = R.string.spanish,
+        dataset = spanishQuestions
+    )
 )
