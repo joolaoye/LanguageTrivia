@@ -1,4 +1,4 @@
-package com.example.linguawarrior.ui.screens
+package com.example.linguawarrior.ui.screens.Game
 
 import com.example.LinguaWarrior.model.Question
 

@@ -1,10 +1,9 @@
-package com.example.linguawarrior.ui.screens
+package com.example.linguawarrior.ui.screens.Game
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.data.frenchQuestions
-import com.example.linguawarrior.model.QuizOption
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.linguawarrior.ui.screens.QuestionScreen
+import com.example.linguawarrior.ui.screens.Game.QuestionScreen
 import com.example.linguawarrior.ui.screens.Start.StartScreen
 
 
