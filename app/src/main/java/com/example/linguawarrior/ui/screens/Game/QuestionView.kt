@@ -20,10 +20,11 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
+import com.example.linguawarrior.ui.SharedViewModel
 
 @Composable
 fun QuestionView(
-    quizViewModel: GameViewModel = viewModel(),
+    quizViewModel: SharedViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
 
@@ -54,7 +55,7 @@ fun QuestionView(
 
 @Composable
 fun QuestionOptions(
-    quizViewModel: GameViewModel = viewModel(),
+    quizViewModel: SharedViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
     val quizUiState by quizViewModel.uiState.collectAsState()

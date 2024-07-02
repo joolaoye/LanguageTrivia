@@ -18,13 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.linguawarrior.data.quizOptions
+import com.example.linguawarrior.ui.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(
+    sharedViewModel: SharedViewModel,
     onConfirmation: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -48,11 +51,14 @@ fun StartScreen(
             modifier = Modifier
                 .padding(paddingValues)
         ) {
-            items(quizOptions) {it ->
+            items(quizOptions) {
                 QuizCard(
                     language = it.language,
                     image = it.image,
-                    onPlay = { displayDialog = !displayDialog },
+                    onPlay = {
+                        sharedViewModel.uploadDataset(it.dataset)
+                        displayDialog = !displayDialog
+                             },
                     modifier =  Modifier
                         .padding(
                             horizontal = dimensionResource(id = R.dimen.padding_small),
@@ -76,8 +82,9 @@ fun StartScreen(
 @Preview
 @Composable
 fun StartScreenPreview() {
-    LinguaWarriorTheme() {
+    LinguaWarriorTheme {
         StartScreen(
+            sharedViewModel = viewModel(),
             onConfirmation = {}
         )
     }
