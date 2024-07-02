@@ -166,22 +166,22 @@ fun StartDialog(
                     .padding(dimensionResource(id = R.dimen.padding_medium))
             ) {
                 Text(
-                    text = "TRIVIA",
+                    text = stringResource(R.string.trivia),
                     style = MaterialTheme.typography.titleLarge
                 )
 
                 Text(
-                    text = "You will have 10 seconds to answer each question.",
+                    text = stringResource(R.string.you_will_have_10_seconds_to_answer_each_question),
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Text(
-                    text = "The faster you answer, the higher your score.",
+                    text = stringResource(R.string.the_faster_you_answer_the_higher_your_score),
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Text(
-                    text = "The harder the question, the higher your score.",
+                    text = stringResource(R.string.the_harder_the_question_the_higher_your_score),
                     style = MaterialTheme.typography.bodyMedium
                 )
 

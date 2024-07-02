@@ -11,7 +11,7 @@ import com.example.linguawarrior.ui.screens.Start.StartScreen
 
 enum class LinguaWarriorScreen() {
     Start,
-    QuizScreen
+    Game
 }
 @Composable
 fun LinguaWarriorApp(
@@ -23,11 +23,11 @@ fun LinguaWarriorApp(
     ) {
         composable(route = LinguaWarriorScreen.Start.name ) {
             StartScreen(
-                onConfirmation = { navController.navigate(route = LinguaWarriorScreen.QuizScreen.name)}
+                onConfirmation = { navController.navigate(route = LinguaWarriorScreen.Game.name)}
             )
         }
 
-        composable(route =  LinguaWarriorScreen.QuizScreen.name) {
+        composable(route =  LinguaWarriorScreen.Game.name) {
             QuestionScreen(
                 onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) }
             )

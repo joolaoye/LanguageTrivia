@@ -16,4 +16,10 @@
     <string name="audio">Audio</string>
     <string name="toggle_audio">Enable or Disable audio</string>
     <string name="trivia_paused">TRIVIA PAUSED</string>
+    <string name="trivia">TRIVIA</string>
+    <string name="you_will_have_10_seconds_to_answer_each_question">You will have 10 seconds to answer each question.</string>
+    <string name="the_faster_you_answer_the_higher_your_score">The faster you answer, the higher your score.</string>
+    <string name="the_harder_the_question_the_higher_your_score">The harder the question, the higher your score.</string>
+    <string name="question_count">%1$s/10</string>
+    <string name="current_score">%1$s</string>
 </resources>
