@@ -12,20 +12,27 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
+import androidx.compose.ui.graphics.Color
+import com.example.linguawarrior.ui.SharedViewModel
 
 @Composable
 fun TopBar(
     questionNumber : Int,
     time : String,
     score: Int,
+    sharedViewModel: SharedViewModel,
     onPause : () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val sharedUiState by sharedViewModel.uiState.collectAsState()
+
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = modifier
@@ -46,7 +53,12 @@ fun TopBar(
 
         LabelAndTextColumn(
             label = stringResource(R.string.time),
-            text = time
+            text = time,
+            textColor = if (sharedUiState.time < 5) {
+                MaterialTheme.colorScheme.error
+            } else {
+                MaterialTheme.colorScheme.onBackground
+            }
         )
 
         LabelAndTextColumn(
@@ -58,8 +70,9 @@ fun TopBar(
 
 @Composable
 fun LabelAndTextColumn(
-    label : String,
-    text : String,
+    label: String,
+    text: String,
+    textColor : Color = MaterialTheme.colorScheme.onBackground,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -76,7 +89,8 @@ fun LabelAndTextColumn(
 
         Text(
             text = text,
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
+            color = textColor
         )
     }
 }

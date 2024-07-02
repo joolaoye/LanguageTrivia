@@ -1,6 +1,7 @@
 package com.example.linguawarrior.ui.screens.Game
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -32,6 +33,7 @@ fun GameScreen(
                 questionNumber = sharedUiState.questionNumber,
                 time = stringResource(R.string.time_value, sharedUiState.time),
                 score = sharedUiState.currentScore,
+                sharedViewModel = sharedViewModel,
                 onPause = {
                     sharedViewModel.pauseTimer()
                     isPause = !isPause
