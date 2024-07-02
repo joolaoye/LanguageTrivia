@@ -1,6 +1,5 @@
-package com.example.linguawarrior.ui
+package com.example.linguawarrior.ui.screens
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,27 +14,35 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.model.Question
-import com.example.linguawarrior.ui.components.SelectOption
 import com.example.linguawarrior.data.frenchQuestions
+import com.example.linguawarrior.ui.components.PauseMenu
+import com.example.linguawarrior.ui.components.SelectOption
 
-@Preview
 @Composable
 fun QuestionScreen(
+    quizViewModel: QuizViewModel = viewModel(),
+    onExitPauseMenu : () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val quizUiState by quizViewModel.uiState.collectAsState()
+
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopBar(
                 questionNumber = "1",
                 time = ":05",
-                score = "100"
+                score = "100",
+                onPause = { quizViewModel.pauseGame() }
             )
         }
     ) {
@@ -45,6 +52,19 @@ fun QuestionScreen(
             question = frenchQuestions[0],
             modifier = Modifier.padding(paddingValues)
         )
+
+        if (quizUiState.isPaused) {
+            PauseMenu(
+                checked = quizUiState.audioToggleChecked,
+                onCheckedChanged = { quizViewModel.toggleAudio() },
+                onDissmissRequest = { quizViewModel.dismissPauseDialog() },
+                onResumeQuiz = { quizViewModel.dismissPauseDialog() },
+                onExit = {
+                    quizViewModel.dismissPauseDialog()
+                    onExitPauseMenu()
+                }
+            )
+        }
     }
 }
 
@@ -97,6 +117,7 @@ fun TopBar(
     questionNumber : String,
     time : String,
     score: String,
+    onPause : () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -105,7 +126,7 @@ fun TopBar(
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.padding_small))
     ) {
-        IconButton(onClick = { /*TODO*/ }) {
+        IconButton(onClick = onPause) {
             Icon(
                 imageVector = Icons.Filled.Pause,
                 contentDescription = stringResource(R.string.pause)
