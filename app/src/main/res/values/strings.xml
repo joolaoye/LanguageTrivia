@@ -22,4 +22,5 @@
     <string name="the_harder_the_question_the_higher_your_score">The harder the question, the higher your score.</string>
     <string name="question_count">%1$s/10</string>
     <string name="current_score">%1$s</string>
+    <string name="time_value">:%1$s</string>
 </resources>

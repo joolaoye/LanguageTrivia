@@ -6,6 +6,6 @@ data class GameUiState(
     val dataset : List<Question> = listOf(),
     val currentQuestion : Question = Question(),
     val questionNumber : Int = 1,
-    val time : String = "",
+    val time : Long = 0,
     val currentScore : Int = 0
 )

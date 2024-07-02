@@ -1,6 +1,5 @@
 package com.example.linguawarrior.ui.screens.Game
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -10,6 +9,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import com.example.LinguaWarrior.R
 import com.example.linguawarrior.ui.SharedViewModel
 
 @Composable
@@ -29,9 +30,12 @@ fun GameScreen(
         topBar = {
             TopBar(
                 questionNumber = sharedUiState.questionNumber,
-                time = ":05",
+                time = stringResource(R.string.time_value, sharedUiState.time),
                 score = sharedUiState.currentScore,
-                onPause = { isPause = !isPause }
+                onPause = {
+                    sharedViewModel.pauseTimer()
+                    isPause = !isPause
+                }
             )
         }
     ) {
@@ -44,8 +48,12 @@ fun GameScreen(
 
         if (isPause) {
             PauseMenu(
-                onDissmissRequest = { isPause = !isPause },
-                onResumeQuiz = { isPause = !isPause },
+                onDissmissRequest = {
+                    sharedViewModel.resumeTimer()
+                    isPause = !isPause },
+                onResumeQuiz = {
+                    sharedViewModel.resumeTimer()
+                    isPause = !isPause },
                 onExit = {
                     isPause = !isPause
                     onExitPauseMenu()

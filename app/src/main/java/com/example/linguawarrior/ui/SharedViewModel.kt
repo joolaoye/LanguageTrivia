@@ -1,8 +1,10 @@
 package com.example.linguawarrior.ui
 
-import android.util.Log
+import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel
 import com.example.LinguaWarrior.model.Question
+import com.example.linguawarrior.data.MAX_NO_OF_WORDS
+import com.example.linguawarrior.data.SCORE_INCREASE
 import com.example.linguawarrior.ui.screens.Game.GameUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,21 +21,44 @@ class SharedViewModel : ViewModel() {
     var questionNumber = 0
         private set
 
-    var currentScore = 0
+    var remainingTime : Long = 10000
         private set
 
-    fun checkUserAnswer(option: String) {
+    var timer : CountDownTimer? = null
+
+    fun startTimer(timeInMs : Long) {
+        timer?.cancel()
+
+        timer = object : CountDownTimer(timeInMs, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                remainingTime = millisUntilFinished
+
+                _uiState.update {
+                        currentState ->
+
+                    currentState.copy(time = (millisUntilFinished / 1000))
+                }
+            }
+
+            override fun onFinish() {
+                remainingTime = 10000
+                updateQuestion()
+            }
+        }.start()
+    }
+
+
+    fun checkUserAnswer(option: String = "") {
         if (option == questionSet[questionNumber].answer) {
             _uiState.update {
                     currentState ->
 
                 currentState.copy(
-                    currentScore = _uiState.value.currentScore.plus(20)
+                    currentScore = _uiState.value.currentScore.plus(SCORE_INCREASE)
                 )
             }
         }
-
-        questionNumber += 1
         updateQuestion()
     }
 
@@ -46,14 +71,26 @@ class SharedViewModel : ViewModel() {
                 questionNumber = questionNumber.inc()
             )
         }
+
+        questionNumber += 1
+
+        startTimer(remainingTime)
     }
 
     fun uploadDataset(dataset: List<Question>) {
         _uiState.value = GameUiState(dataset = dataset)
     }
 
+    fun pauseTimer() {
+        timer?.cancel()
+    }
+
+    fun resumeTimer() {
+        startTimer(remainingTime)
+    }
+
     fun resetGame() {
-        questionSet =  _uiState.value.dataset.shuffled().take(10)
+        questionSet =  _uiState.value.dataset.shuffled().take(MAX_NO_OF_WORDS)
         questionNumber = 0
         updateQuestion()
     }

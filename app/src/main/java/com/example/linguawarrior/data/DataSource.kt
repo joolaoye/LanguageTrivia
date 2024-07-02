@@ -4,6 +4,9 @@ import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.model.QuizOption
 
+const val MAX_NO_OF_WORDS = 10
+const val SCORE_INCREASE = 100
+
 val frenchQuestions = listOf(
     Question("chat", listOf("dog", "cat", "elephant", "rabbit"), "cat"),
     Question("maison", listOf("house", "tree", "river", "car"), "house"),
