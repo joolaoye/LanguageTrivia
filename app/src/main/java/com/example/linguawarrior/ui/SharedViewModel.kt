@@ -1,15 +1,19 @@
 package com.example.linguawarrior.ui
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.data.MAX_NO_OF_WORDS
 import com.example.linguawarrior.data.SCORE_INCREASE
 import com.example.linguawarrior.ui.screens.Game.GameUiState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(GameUiState())
@@ -50,16 +54,36 @@ class SharedViewModel : ViewModel() {
 
 
     fun checkUserAnswer(option: String = "") {
-        if (option == questionSet[questionNumber].answer) {
-            _uiState.update {
-                    currentState ->
+        viewModelScope.launch {
+            Log.d("test", questionSet[questionNumber].answer)
+            if (option == questionSet[questionNumber].answer) {
+                _uiState.update {
+                        currentState ->
 
-                currentState.copy(
-                    currentScore = _uiState.value.currentScore.plus(SCORE_INCREASE)
-                )
+                    currentState.copy(
+                        currentScore = _uiState.value.currentScore.plus(SCORE_INCREASE),
+                        canClick = false
+                    )
+                }
+            } else {
+                _uiState.update {
+                        currentState ->
+
+                    currentState.copy(
+                        answeredWrong = true,
+                        canClick = false
+                    )
+                }
             }
+
+            pauseTimer()
+
+            delay(2000)
+
+            remainingTime = 10000
+            questionNumber += 1
+            updateQuestion()
         }
-        updateQuestion()
     }
 
     fun updateQuestion() {
@@ -68,11 +92,11 @@ class SharedViewModel : ViewModel() {
 
             currentState.copy(
                 currentQuestion = questionSet[questionNumber],
-                questionNumber = questionNumber.inc()
+                questionNumber = currentState.questionNumber.inc(),
+                answeredWrong = false,
+                canClick = true
             )
         }
-
-        questionNumber += 1
 
         startTimer(remainingTime)
     }

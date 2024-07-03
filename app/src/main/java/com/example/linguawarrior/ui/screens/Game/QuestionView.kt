@@ -13,13 +13,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.ui.theme.extended
 import com.example.linguawarrior.ui.SharedViewModel
 
 @Composable
@@ -60,6 +65,10 @@ fun QuestionOptions(
 ) {
     val quizUiState by quizViewModel.uiState.collectAsState()
 
+    var selected by rememberSaveable {
+        mutableStateOf("")
+    }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
@@ -67,7 +76,25 @@ fun QuestionOptions(
         quizUiState.currentQuestion.options.forEach {option ->
             SelectOption(
                 option = option,
-                onSelect = { quizViewModel.checkUserAnswer(option) }
+                onSelect = { if (quizUiState.canClick) {
+                    selected = option
+                    quizViewModel.checkUserAnswer(option) } },
+                color = when {
+                    selected == option && (quizUiState.answeredWrong) ->
+                        MaterialTheme.colorScheme.error
+                    option == quizUiState.currentQuestion.answer && !(quizUiState.canClick)  ->
+                            extended.success.color
+                    else ->
+                        MaterialTheme.colorScheme.primaryContainer
+                },
+                textColor  = when {
+                    selected == option  ->
+                        MaterialTheme.colorScheme.onError
+                    option == quizUiState.currentQuestion.answer && !(quizUiState.canClick)  ->
+                        MaterialTheme.colorScheme.onError
+                    else ->
+                        MaterialTheme.colorScheme.onPrimaryContainer
+                }
             )
         }
     }
@@ -76,11 +103,13 @@ fun QuestionOptions(
 @Composable
 fun SelectOption(
     onSelect : () -> Unit,
+    color : Color = MaterialTheme.colorScheme.primaryContainer,
+    textColor : Color = MaterialTheme.colorScheme.onPrimaryContainer,
     option : String,
     modifier: Modifier = Modifier
 ) {
     Surface(
-        color = MaterialTheme.colorScheme.primaryContainer,
+        color = color,
         modifier = modifier
             .clip(MaterialTheme.shapes.small)
             .clickable { onSelect() }
@@ -93,7 +122,8 @@ fun SelectOption(
         ) {
             Text(
                 text = option,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                color = textColor
             )
         }
     }

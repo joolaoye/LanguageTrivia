@@ -20,6 +20,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
 import androidx.compose.ui.graphics.Color
+import com.example.LinguaWarrior.ui.theme.extended
 import com.example.linguawarrior.ui.SharedViewModel
 
 @Composable
@@ -57,7 +58,7 @@ fun TopBar(
             textColor = if (sharedUiState.time < 5) {
                 MaterialTheme.colorScheme.error
             } else {
-                MaterialTheme.colorScheme.onBackground
+                extended.success.color
             }
         )
 

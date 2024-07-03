@@ -60,6 +60,16 @@ val inverseSurfaceDark = Color(0xFFE0E2E8)
 val inverseOnSurfaceDark = Color(0xFF2D3135)
 val inversePrimaryDark = Color(0xFF2E628C)
 
+val successLight = Color(0xFF3E6837)
+val onSuccessLight = Color(0xFFFFFFFF)
+val successContainerLight = Color(0xFFBFF0B1)
+val onSuccessContainerLight = Color(0xFF002201)
+
+val successDark = Color(0xFFA4D397)
+val onSuccessDark = Color(0xFF0F380D)
+val successContainerDark = Color(0xFF275021)
+val onSuccessContainerDark = Color(0xFFBFF0B1)
+
 
 
 
