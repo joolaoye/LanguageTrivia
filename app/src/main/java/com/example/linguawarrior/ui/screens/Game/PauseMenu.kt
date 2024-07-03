@@ -31,12 +31,11 @@ fun PauseMenu(
     onResumeQuiz : () -> Unit,
     onExit : () -> Unit,
     onNewTrivia : () -> Unit,
-    onDissmissRequest: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     AlertDialog(
         modifier = modifier,
-        onDismissRequest = onDissmissRequest,
+        onDismissRequest = { },
     ) {
         Card {
             Column(

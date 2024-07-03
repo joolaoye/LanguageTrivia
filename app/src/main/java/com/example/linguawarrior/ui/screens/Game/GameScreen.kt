@@ -49,9 +49,6 @@ fun GameScreen(
 
         if (isPause) {
             PauseMenu(
-                onDissmissRequest = {
-                    sharedViewModel.resumeTimer()
-                    isPause = !isPause },
                 onResumeQuiz = {
                     sharedViewModel.resumeTimer()
                     isPause = !isPause },
