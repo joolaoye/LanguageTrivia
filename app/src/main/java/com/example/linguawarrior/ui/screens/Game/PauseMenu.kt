@@ -23,12 +23,14 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
+import kotlinx.coroutines.newSingleThreadContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PauseMenu(
     onResumeQuiz : () -> Unit,
     onExit : () -> Unit,
+    onNewTrivia : () -> Unit,
     onDissmissRequest: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -51,7 +53,8 @@ fun PauseMenu(
 
                 TextButtonGroup(
                     onResumeQuiz = onResumeQuiz,
-                    onExit = onExit
+                    onExit = onExit,
+                    newTrivia = onNewTrivia
                 )
             }
         }
@@ -61,6 +64,7 @@ fun PauseMenu(
 @Composable
 fun TextButtonGroup(
     onResumeQuiz: () -> Unit,
+    newTrivia : () -> Unit,
     onExit: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -76,7 +80,7 @@ fun TextButtonGroup(
             )
         }
 
-        TextButton(onClick = { /*TODO*/ }) {
+        TextButton(onClick = newTrivia) {
             Text(
                 text = stringResource(R.string.new_trivia),
                 style = MaterialTheme.typography.bodyLarge

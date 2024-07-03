@@ -80,7 +80,7 @@ class SharedViewModel : ViewModel() {
 
             delay(2000)
 
-            remainingTime = 10000
+            resetTimer()
             questionNumber += 1
             updateQuestion()
         }
@@ -92,7 +92,7 @@ class SharedViewModel : ViewModel() {
 
             currentState.copy(
                 currentQuestion = questionSet[questionNumber],
-                questionNumber = currentState.questionNumber.inc(),
+                questionNumber = questionNumber + 1,
                 answeredWrong = false,
                 canClick = true
             )
@@ -113,9 +113,22 @@ class SharedViewModel : ViewModel() {
         startTimer(remainingTime)
     }
 
+    fun resetTimer() {
+        pauseTimer()
+        remainingTime = 10000
+    }
+
     fun resetGame() {
         questionSet =  _uiState.value.dataset.shuffled().take(MAX_NO_OF_WORDS)
+        resetTimer()
         questionNumber = 0
+        _uiState.update {
+            currentState ->
+
+            currentState.copy(
+                currentScore = 0
+            )
+        }
         updateQuestion()
     }
 }

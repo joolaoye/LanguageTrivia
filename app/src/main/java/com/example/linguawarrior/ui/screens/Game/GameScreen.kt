@@ -58,6 +58,10 @@ fun GameScreen(
                 onExit = {
                     isPause = !isPause
                     onExitPauseMenu()
+                },
+                onNewTrivia = {
+                    isPause = !isPause
+                    sharedViewModel.resetGame()
                 }
             )
         }
