@@ -1,4 +1,4 @@
-package com.example.linguawarrior.ui.screens.Start
+package com.example.linguawarrior.ui.screens.start
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

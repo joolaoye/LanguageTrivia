@@ -1,4 +1,4 @@
-package com.example.linguawarrior.ui.screens.Game
+package com.example.linguawarrior.ui.screens.game
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -61,6 +61,15 @@ fun GameScreen(
                     sharedViewModel.resetGame()
                 }
             )
+        }
+        
+        if (sharedUiState.quizEnd) {
+            ResultScreen(
+                score = sharedUiState.currentScore,
+                answeredCorrectly = sharedUiState.answeredCorrectly,
+                replayTrivia = { sharedViewModel.resetGame() },
+                revealAnswers = { /*TODO*/ },
+                onExit = { onExitPauseMenu() })
         }
     }
 }

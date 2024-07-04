@@ -24,4 +24,8 @@
     <string name="current_score">%1$s</string>
     <string name="time_value">:%1$s</string>
     <string name="play_to_find_out">Play to find out</string>
+    <string name="replay_trivia">REPLAY TRIVIA</string>
+    <string name="review_answers">REVIEW ANSWERS</string>
+    <string name="words_you_got_right">WORDS YOU GOT RIGHT</string>
+    <string name="answered_correctly">%1$s Of 10</string>
 </resources>

@@ -6,8 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.linguawarrior.ui.screens.Game.GameScreen
-import com.example.linguawarrior.ui.screens.Start.StartScreen
+import com.example.linguawarrior.ui.screens.game.GameScreen
+import com.example.linguawarrior.ui.screens.start.StartScreen
 
 
 enum class LinguaWarriorScreen() {

@@ -5,10 +5,3 @@ data class Question (
     val options : List<String> = listOf(),
     val answer : String = ""
 )
-
-data class Answered (
-    var word: String,
-    var selected: String,
-    var correct: String,
-    var answeredCorrectly: Boolean
-)

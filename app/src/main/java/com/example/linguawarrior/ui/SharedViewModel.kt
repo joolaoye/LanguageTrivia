@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.data.MAX_NO_OF_WORDS
 import com.example.linguawarrior.data.SCORE_INCREASE
-import com.example.linguawarrior.ui.screens.Game.GameUiState
+import com.example.linguawarrior.ui.screens.game.GameUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -62,6 +62,7 @@ class SharedViewModel : ViewModel() {
 
                     currentState.copy(
                         currentScore = _uiState.value.currentScore.plus(SCORE_INCREASE),
+                        answeredCorrectly = currentState.answeredCorrectly + 1,
                         canClick = false
                     )
                 }
@@ -87,18 +88,28 @@ class SharedViewModel : ViewModel() {
     }
 
     fun updateQuestion() {
-        _uiState.update {
+        if (questionNumber == MAX_NO_OF_WORDS) {
+            _uiState.update {
                 currentState ->
 
-            currentState.copy(
-                currentQuestion = questionSet[questionNumber],
-                questionNumber = questionNumber + 1,
-                answeredWrong = false,
-                canClick = true
-            )
-        }
+                currentState.copy(
+                    quizEnd = true
+                )
+            }
+        } else {
+            _uiState.update {
+                    currentState ->
 
-        startTimer(remainingTime)
+                currentState.copy(
+                    currentQuestion = questionSet[questionNumber],
+                    questionNumber = questionNumber + 1,
+                    answeredWrong = false,
+                    canClick = true
+                )
+            }
+
+            startTimer(remainingTime)
+        }
     }
 
     fun uploadDataset(dataset: List<Question>) {
@@ -126,7 +137,10 @@ class SharedViewModel : ViewModel() {
             currentState ->
 
             currentState.copy(
-                currentScore = 0
+                currentScore = 0,
+                answeredCorrectly = 0,
+                answeredWrong = false,
+                quizEnd = false
             )
         }
         updateQuestion()
