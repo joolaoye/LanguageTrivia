@@ -27,4 +27,5 @@
     <string name="review_answers">REVIEW ANSWERS</string>
     <string name="words_you_got_right">WORDS YOU GOT RIGHT</string>
     <string name="answered_correctly">%1$s Of 10</string>
+    <string name="question_number">QUESTION %1$s</string>
 </resources>

@@ -5,5 +5,6 @@ import com.example.LinguaWarrior.model.Question
 
 data class Answer(
     val question: Question,
-    val choice: String
+    val choice: String,
+    val questionNumber : Int
 )

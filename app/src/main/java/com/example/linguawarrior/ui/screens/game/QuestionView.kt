@@ -34,14 +34,16 @@ fun QuestionView(
         modifier = modifier
             .fillMaxHeight()
             .padding(dimensionResource(id = R.dimen.padding_medium)),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = word,
             style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
-                .padding(vertical = dimensionResource(id = R.dimen.padding_large))
+                .padding(
+                    top = dimensionResource(id = R.dimen.padding_medium),
+                    bottom = dimensionResource(id = R.dimen.padding_large)
+                )
         )
 
         QuestionOptions(

@@ -45,7 +45,8 @@ fun LinguaWarriorApp(
 
         composable(route = LinguaWarriorScreen.ReviewAnswers.name) {
             RevealAnswersScreen(
-                sharedViewModel = sharedViewModel
+                sharedViewModel = sharedViewModel,
+                navigateUp = { navController.navigateUp() }
             )
         }
     }

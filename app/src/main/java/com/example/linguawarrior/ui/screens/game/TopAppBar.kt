@@ -7,10 +7,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import com.example.LinguaWarrior.ui.theme.extended
 import com.example.linguawarrior.ui.SharedViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
     questionNumber : Int,
@@ -34,39 +37,43 @@ fun TopBar(
 ) {
     val sharedUiState by sharedViewModel.uiState.collectAsState()
 
-    Row(
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.padding_small))
-    ) {
-        IconButton(onClick = onPause) {
-            Icon(
-                imageVector = Icons.Filled.Pause,
-                contentDescription = stringResource(R.string.pause)
-            )
-        }
+    TopAppBar(
+        title = {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+            ) {
+                IconButton(onClick = onPause) {
+                    Icon(
+                        imageVector = Icons.Filled.Pause,
+                        contentDescription = stringResource(R.string.pause)
+                    )
+                }
 
-        LabelAndTextColumn(
-            label = stringResource(R.string.question),
-            text = stringResource(R.string.question_count, questionNumber)
-        )
+                LabelAndTextColumn(
+                    label = stringResource(R.string.question),
+                    text = stringResource(R.string.question_count, questionNumber)
+                )
 
-        LabelAndTextColumn(
-            label = stringResource(R.string.time),
-            text = time,
-            textColor = if (sharedUiState.time < 5) {
-                MaterialTheme.colorScheme.error
-            } else {
-                extended.success.color
+                LabelAndTextColumn(
+                    label = stringResource(R.string.time),
+                    text = time,
+                    textColor = if (sharedUiState.time < 5) {
+                        MaterialTheme.colorScheme.error
+                    } else {
+                        extended.success.color
+                    }
+                )
+
+                LabelAndTextColumn(
+                    label = stringResource(R.string.score),
+                    text = stringResource(R.string.current_score, score)
+                )
             }
-        )
-
-        LabelAndTextColumn(
-            label = stringResource(R.string.score),
-            text = stringResource(R.string.current_score, score)
-        )
-    }
+        }
+    )
 }
 
 @Composable

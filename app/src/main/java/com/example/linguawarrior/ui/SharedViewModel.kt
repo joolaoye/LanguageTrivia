@@ -61,11 +61,11 @@ class SharedViewModel : ViewModel() {
 
                val updatedAnswers = currentState.answers.toMutableList()
 
-               // Add the new answer
                updatedAnswers.add(
                    Answer(
                        question = currentState.currentQuestion,
-                       choice = option
+                       choice = option,
+                       questionNumber = questionNumber + 1
                    )
                )
 
