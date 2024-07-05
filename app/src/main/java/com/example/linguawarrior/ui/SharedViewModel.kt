@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.data.MAX_NO_OF_WORDS
 import com.example.linguawarrior.data.SCORE_INCREASE
+import com.example.linguawarrior.model.Answer
 import com.example.linguawarrior.ui.screens.game.GameUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,8 +47,7 @@ class SharedViewModel : ViewModel() {
             }
 
             override fun onFinish() {
-                remainingTime = 10000
-                updateQuestion()
+                checkUserAnswer()
             }
         }.start()
     }
@@ -55,7 +55,25 @@ class SharedViewModel : ViewModel() {
 
     fun checkUserAnswer(option: String = "") {
         viewModelScope.launch {
-            Log.d("test", questionSet[questionNumber].answer)
+
+           _uiState.update {
+               currentState ->
+
+               val updatedAnswers = currentState.answers.toMutableList()
+
+               // Add the new answer
+               updatedAnswers.add(
+                   Answer(
+                       question = currentState.currentQuestion,
+                       choice = option
+                   )
+               )
+
+               currentState.copy(
+                   selected = option,
+                   answers = updatedAnswers
+               )
+           }
             if (option == questionSet[questionNumber].answer) {
                 _uiState.update {
                         currentState ->
@@ -103,6 +121,7 @@ class SharedViewModel : ViewModel() {
                 currentState.copy(
                     currentQuestion = questionSet[questionNumber],
                     questionNumber = questionNumber + 1,
+                    selected = "",
                     answeredWrong = false,
                     canClick = true
                 )

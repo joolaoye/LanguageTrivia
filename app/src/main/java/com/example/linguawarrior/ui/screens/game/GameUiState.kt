@@ -1,6 +1,7 @@
 package com.example.linguawarrior.ui.screens.game
 
 import com.example.LinguaWarrior.model.Question
+import com.example.linguawarrior.model.Answer
 
 data class GameUiState(
     val dataset : List<Question> = listOf(),
@@ -12,4 +13,6 @@ data class GameUiState(
     val answeredWrong : Boolean = false,
     val canClick : Boolean = false,
     val quizEnd : Boolean = false,
+    val selected : String = "",
+    val answers : MutableList<Answer> = mutableListOf()
 )

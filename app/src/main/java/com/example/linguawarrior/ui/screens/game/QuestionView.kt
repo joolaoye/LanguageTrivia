@@ -11,78 +11,71 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.extended
-import com.example.linguawarrior.ui.SharedViewModel
 
 @Composable
 fun QuestionView(
-    quizViewModel: SharedViewModel = viewModel(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    word : String,
+    options: List<String>,
+    canClick : Boolean,
+    answer : String,
+    onOptionSelected : (String) -> Unit = {},
+    selected : String
 ) {
-
-    val quizUiState by quizViewModel.uiState.collectAsState()
 
     Column(
         modifier = modifier
-            .fillMaxHeight(0.7f)
+            .fillMaxHeight()
             .padding(dimensionResource(id = R.dimen.padding_medium)),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.SpaceEvenly
     ) {
         Text(
-            text = stringResource(R.string.pick_the_best_option),
-            style = MaterialTheme.typography.bodyMedium
-        )
-
-        Text(
-            text = quizUiState.currentQuestion.word,
-            style = MaterialTheme.typography.titleLarge
+            text = word,
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier
+                .padding(vertical = dimensionResource(id = R.dimen.padding_large))
         )
 
         QuestionOptions(
-            quizViewModel = quizViewModel
+            options = options,
+            canClick = canClick,
+            answer = answer,
+            onOptionSelected = onOptionSelected,
+            selected = selected
         )
     }
 }
 
 @Composable
 fun QuestionOptions(
-    quizViewModel: SharedViewModel = viewModel(),
+    options : List<String>,
+    canClick: Boolean,
+    answer: String,
+    onOptionSelected: (String) -> Unit,
+    selected : String,
     modifier: Modifier = Modifier
 ) {
-    val quizUiState by quizViewModel.uiState.collectAsState()
-
-    var selected by rememberSaveable {
-        mutableStateOf("")
-    }
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large))
     ) {
-        quizUiState.currentQuestion.options.forEach {option ->
+        options.forEach {option ->
             SelectOption(
                 option = option,
-                onSelect = { if (quizUiState.canClick) {
-                    selected = option
-                    quizViewModel.checkUserAnswer(option) } },
+                onSelect = { if (canClick) {
+                    onOptionSelected(option) } },
                 color = when {
-                    selected == option && (quizUiState.answeredWrong) ->
+                    selected == option && (selected != answer) ->
                         MaterialTheme.colorScheme.error
-                    option == quizUiState.currentQuestion.answer && !(quizUiState.canClick)  ->
+                    option == answer && !(canClick)  ->
                             extended.success.color
                     else ->
                         MaterialTheme.colorScheme.primaryContainer
@@ -90,7 +83,7 @@ fun QuestionOptions(
                 textColor  = when {
                     selected == option  ->
                         MaterialTheme.colorScheme.onError
-                    option == quizUiState.currentQuestion.answer && !(quizUiState.canClick)  ->
+                    option == answer && !(canClick)  ->
                         MaterialTheme.colorScheme.onError
                     else ->
                         MaterialTheme.colorScheme.onPrimaryContainer

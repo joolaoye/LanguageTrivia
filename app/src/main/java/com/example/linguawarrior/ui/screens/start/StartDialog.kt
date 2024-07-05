@@ -41,17 +41,17 @@ fun StartDialog(
                 )
 
                 Text(
+                    text = stringResource(R.string.pick_the_best_option),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+
+                Text(
                     text = stringResource(R.string.you_will_have_10_seconds_to_answer_each_question),
                     style = MaterialTheme.typography.bodyMedium
                 )
 
                 Text(
                     text = stringResource(R.string.the_faster_you_answer_the_higher_your_score),
-                    style = MaterialTheme.typography.bodyMedium
-                )
-
-                Text(
-                    text = stringResource(R.string.the_harder_the_question_the_higher_your_score),
                     style = MaterialTheme.typography.bodyMedium
                 )
 

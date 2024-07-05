@@ -6,13 +6,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.linguawarrior.ui.screens.answers.RevealAnswersScreen
 import com.example.linguawarrior.ui.screens.game.GameScreen
 import com.example.linguawarrior.ui.screens.start.StartScreen
 
 
 enum class LinguaWarriorScreen() {
     Start,
-    Game
+    Game,
+    ReviewAnswers
 }
 @Composable
 fun LinguaWarriorApp(
@@ -36,7 +38,14 @@ fun LinguaWarriorApp(
         composable(route =  LinguaWarriorScreen.Game.name) {
             GameScreen(
                 sharedViewModel = sharedViewModel,
-                onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) }
+                onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) },
+                onReviewAnswer = { navController.navigate(route = LinguaWarriorScreen.ReviewAnswers.name) }
+            )
+        }
+
+        composable(route = LinguaWarriorScreen.ReviewAnswers.name) {
+            RevealAnswersScreen(
+                sharedViewModel = sharedViewModel
             )
         }
     }

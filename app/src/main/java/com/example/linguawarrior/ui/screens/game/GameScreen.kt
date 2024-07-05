@@ -17,7 +17,8 @@ import com.example.linguawarrior.ui.SharedViewModel
 fun GameScreen(
     modifier: Modifier = Modifier,
     sharedViewModel: SharedViewModel,
-    onExitPauseMenu : () -> Unit
+    onExitPauseMenu : () -> Unit,
+    onReviewAnswer : () -> Unit,
 ) {
     val sharedUiState by sharedViewModel.uiState.collectAsState()
 
@@ -43,7 +44,12 @@ fun GameScreen(
         paddingValues ->
 
         QuestionView(
-            quizViewModel = sharedViewModel,
+            word = sharedUiState.currentQuestion.word,
+            options = sharedUiState.currentQuestion.options,
+            canClick = sharedUiState.canClick,
+            onOptionSelected = { sharedViewModel.checkUserAnswer(it) },
+            answer = sharedUiState.currentQuestion.answer,
+            selected = sharedUiState.selected,
             modifier = Modifier.padding(paddingValues)
         )
 
@@ -68,7 +74,7 @@ fun GameScreen(
                 score = sharedUiState.currentScore,
                 answeredCorrectly = sharedUiState.answeredCorrectly,
                 replayTrivia = { sharedViewModel.resetGame() },
-                revealAnswers = { /*TODO*/ },
+                revealAnswers = onReviewAnswer,
                 onExit = { onExitPauseMenu() })
         }
     }
