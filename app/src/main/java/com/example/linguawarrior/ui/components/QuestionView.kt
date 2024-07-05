@@ -1,4 +1,4 @@
-package com.example.linguawarrior.ui.screens.game
+package com.example.linguawarrior.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -97,11 +97,11 @@ fun QuestionOptions(
 
 @Composable
 fun SelectOption(
+    modifier: Modifier = Modifier,
     onSelect : () -> Unit,
     color : Color = MaterialTheme.colorScheme.primaryContainer,
     textColor : Color = MaterialTheme.colorScheme.onPrimaryContainer,
-    option : String,
-    modifier: Modifier = Modifier
+    option : String
 ) {
     Surface(
         color = color,

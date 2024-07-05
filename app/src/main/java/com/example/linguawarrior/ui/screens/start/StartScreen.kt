@@ -53,7 +53,7 @@ fun StartScreen(
                 QuizCard(
                     language = it.language,
                     onPlay = {
-                        sharedViewModel.uploadDataset(it.dataset)
+                        sharedViewModel.uploadQuestionSet(it.dataset)
                         displayDialog = !displayDialog
                              },
                     modifier =  Modifier

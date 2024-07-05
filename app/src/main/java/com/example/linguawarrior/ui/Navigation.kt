@@ -30,7 +30,6 @@ fun LinguaWarriorApp(
                 sharedViewModel = sharedViewModel,
                 onConfirmation = {
                     navController.navigate(route = LinguaWarriorScreen.Game.name)
-                    sharedViewModel.resetGame()
                 }
             )
         }
@@ -38,6 +37,7 @@ fun LinguaWarriorApp(
         composable(route =  LinguaWarriorScreen.Game.name) {
             GameScreen(
                 sharedViewModel = sharedViewModel,
+                gameViewModel = GameViewModel(questions = sharedViewModel.fetchQuestions()),
                 onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) },
                 onReviewAnswer = { navController.navigate(route = LinguaWarriorScreen.ReviewAnswers.name) }
             )

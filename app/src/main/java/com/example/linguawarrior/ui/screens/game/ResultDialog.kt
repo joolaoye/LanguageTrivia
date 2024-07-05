@@ -19,12 +19,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
-import com.example.linguawarrior.data.quizOptions
-import com.example.linguawarrior.ui.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ResultScreen(
+fun ResultDialog(
     score : Int,
     answeredCorrectly : Int,
     replayTrivia : () -> Unit,
@@ -108,7 +106,7 @@ fun ResultScreen(
 @Composable
 fun ResultScreenPreview() {
     LinguaWarriorTheme {
-        ResultScreen(
+        ResultDialog(
             score = 100,
             answeredCorrectly = 1,
             replayTrivia = {},

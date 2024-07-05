@@ -29,13 +29,11 @@ import com.example.linguawarrior.ui.SharedViewModel
 @Composable
 fun TopBar(
     questionNumber : Int,
-    time : String,
+    time : Long,
     score: Int,
-    sharedViewModel: SharedViewModel,
     onPause : () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val sharedUiState by sharedViewModel.uiState.collectAsState()
 
     TopAppBar(
         title = {
@@ -59,8 +57,8 @@ fun TopBar(
 
                 LabelAndTextColumn(
                     label = stringResource(R.string.time),
-                    text = time,
-                    textColor = if (sharedUiState.time < 5) {
+                    text = ":$time",
+                    textColor = if (time < 5) {
                         MaterialTheme.colorScheme.error
                     } else {
                         extended.success.color

@@ -17,151 +17,34 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(GameUiState())
-    val uiState : StateFlow<GameUiState>
+    private val _uiState = MutableStateFlow(SharedUiState())
+    val uiState : StateFlow<SharedUiState>
         get() = _uiState.asStateFlow()
 
-    private lateinit var questionSet : List<Question>
-
-    var questionNumber = 0
-        private set
-
-    var remainingTime : Long = 10000
-        private set
-
-    var timer : CountDownTimer? = null
-
-    fun startTimer(timeInMs : Long) {
-        timer?.cancel()
-
-        timer = object : CountDownTimer(timeInMs, 1000) {
-
-            override fun onTick(millisUntilFinished: Long) {
-                remainingTime = millisUntilFinished
-
-                _uiState.update {
-                        currentState ->
-
-                    currentState.copy(time = (millisUntilFinished / 1000))
-                }
-            }
-
-            override fun onFinish() {
-                checkUserAnswer()
-            }
-        }.start()
+    fun uploadQuestionSet(questionSet : List<Question>) {
+        _uiState.value = SharedUiState(questionSet = questionSet)
     }
 
-
-    fun checkUserAnswer(option: String = "") {
-        viewModelScope.launch {
-
-           _uiState.update {
-               currentState ->
-
-               val updatedAnswers = currentState.answers.toMutableList()
-
-               updatedAnswers.add(
-                   Answer(
-                       question = currentState.currentQuestion,
-                       choice = option,
-                       questionNumber = questionNumber + 1
-                   )
-               )
-
-               currentState.copy(
-                   selected = option,
-                   answers = updatedAnswers
-               )
-           }
-            if (option == questionSet[questionNumber].answer) {
-                _uiState.update {
-                        currentState ->
-
-                    currentState.copy(
-                        currentScore = _uiState.value.currentScore.plus(SCORE_INCREASE),
-                        answeredCorrectly = currentState.answeredCorrectly + 1,
-                        canClick = false
-                    )
-                }
-            } else {
-                _uiState.update {
-                        currentState ->
-
-                    currentState.copy(
-                        answeredWrong = true,
-                        canClick = false
-                    )
-                }
-            }
-
-            pauseTimer()
-
-            delay(2000)
-
-            resetTimer()
-            questionNumber += 1
-            updateQuestion()
-        }
+    fun fetchQuestions() : List<Question> {
+        return _uiState.value.questionSet.shuffled().take(MAX_NO_OF_WORDS)
     }
 
-    fun updateQuestion() {
-        if (questionNumber == MAX_NO_OF_WORDS) {
-            _uiState.update {
-                currentState ->
+    fun updateAnswer(option: String = "", currentQuestion: Question, questionNumber : Int) {
+        _uiState.update { currentState ->
 
-                currentState.copy(
-                    quizEnd = true
+            val updatedAnswers = currentState.answerSet.toMutableList()
+
+            updatedAnswers.add(
+                Answer(
+                    question = currentQuestion,
+                    choice = option,
+                    questionNumber = questionNumber
                 )
-            }
-        } else {
-            _uiState.update {
-                    currentState ->
-
-                currentState.copy(
-                    currentQuestion = questionSet[questionNumber],
-                    questionNumber = questionNumber + 1,
-                    selected = "",
-                    answeredWrong = false,
-                    canClick = true
-                )
-            }
-
-            startTimer(remainingTime)
-        }
-    }
-
-    fun uploadDataset(dataset: List<Question>) {
-        _uiState.value = GameUiState(dataset = dataset)
-    }
-
-    fun pauseTimer() {
-        timer?.cancel()
-    }
-
-    fun resumeTimer() {
-        startTimer(remainingTime)
-    }
-
-    fun resetTimer() {
-        pauseTimer()
-        remainingTime = 10000
-    }
-
-    fun resetGame() {
-        questionSet =  _uiState.value.dataset.shuffled().take(MAX_NO_OF_WORDS)
-        resetTimer()
-        questionNumber = 0
-        _uiState.update {
-            currentState ->
+            )
 
             currentState.copy(
-                currentScore = 0,
-                answeredCorrectly = 0,
-                answeredWrong = false,
-                quizEnd = false
+                answerSet = updatedAnswers
             )
         }
-        updateQuestion()
     }
 }

@@ -1,0 +1,151 @@
+package com.example.linguawarrior.ui
+
+import android.os.CountDownTimer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.LinguaWarrior.model.Question
+import com.example.linguawarrior.data.MAX_NO_OF_WORDS
+import com.example.linguawarrior.data.SCORE_INCREASE
+import com.example.linguawarrior.ui.screens.game.GameUiState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+class GameViewModel(
+    private val questions: List<Question>
+) : ViewModel() {
+    private val _uiState = MutableStateFlow(GameUiState())
+    val uiState : StateFlow<GameUiState>
+        get() = _uiState.asStateFlow()
+
+    var questionNumber = 0
+        private set
+
+    var currentQuestion = questions[questionNumber]
+        private set
+    var remainingTime : Long = 10000
+        private set
+
+    var timer : CountDownTimer? = null
+
+
+    fun startTimer(timeInMs : Long) {
+        timer?.cancel()
+
+        timer = object : CountDownTimer(timeInMs, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                remainingTime = millisUntilFinished
+
+                _uiState.update {
+                        currentState ->
+
+                    currentState.copy(time = (millisUntilFinished / 1000))
+                }
+            }
+
+            override fun onFinish() {
+                checkUserAnswer()
+            }
+        }.start()
+    }
+
+
+    fun checkUserAnswer(option: String = "") {
+        viewModelScope.launch {
+
+            if (option == currentQuestion.answer) {
+                _uiState.update {
+                        currentState ->
+
+                    currentState.copy(
+                        currentScore = _uiState.value.currentScore.plus(SCORE_INCREASE),
+                        answeredCorrectly = currentState.answeredCorrectly + 1,
+                        canClick = false
+                    )
+                }
+            } else {
+                _uiState.update {
+                        currentState ->
+
+                    currentState.copy(
+                        answeredWrong = true,
+                        canClick = false
+                    )
+                }
+            }
+
+            pauseTimer()
+
+            delay(2000)
+
+            resetTimer()
+            questionNumber += 1
+            updateQuestion()
+        }
+    }
+
+    fun updateQuestion() {
+        if (questionNumber == MAX_NO_OF_WORDS) {
+            _uiState.update {
+                    currentState ->
+
+                currentState.copy(
+                    quizEnd = true
+                )
+            }
+        } else {
+            currentQuestion = questions[questionNumber]
+
+            _uiState.update {
+                    currentState ->
+
+                currentState.copy(
+                    currentQuestion = currentQuestion,
+                    questionNumber = questionNumber + 1,
+                    selected = "",
+                    answeredWrong = false,
+                    canClick = true
+                )
+            }
+
+            startTimer(remainingTime)
+        }
+    }
+
+    fun pauseTimer() {
+        timer?.cancel()
+    }
+
+    fun resumeTimer() {
+        startTimer(remainingTime)
+    }
+
+    private fun resetTimer() {
+        pauseTimer()
+        remainingTime = 10000
+    }
+
+    fun resetGame() {
+        resetTimer()
+        questionNumber = 0
+        _uiState.update {
+                currentState ->
+
+            currentState.copy(
+                currentScore = 0,
+                answeredCorrectly = 0,
+                answeredWrong = false,
+                quizEnd = false
+            )
+        }
+        updateQuestion()
+    }
+
+    init {
+        resetGame()
+    }
+}

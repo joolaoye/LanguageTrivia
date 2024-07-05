@@ -9,18 +9,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.example.LinguaWarrior.R
+import com.example.linguawarrior.ui.GameViewModel
 import com.example.linguawarrior.ui.SharedViewModel
+import com.example.linguawarrior.ui.components.QuestionView
 
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
     sharedViewModel: SharedViewModel,
+    gameViewModel: GameViewModel,
     onExitPauseMenu : () -> Unit,
     onReviewAnswer : () -> Unit,
 ) {
-    val sharedUiState by sharedViewModel.uiState.collectAsState()
+    val gameUiState by gameViewModel.uiState.collectAsState()
 
     var isPause by rememberSaveable {
         mutableStateOf(false)
@@ -30,12 +31,11 @@ fun GameScreen(
         modifier = modifier,
         topBar = {
             TopBar(
-                questionNumber = sharedUiState.questionNumber,
-                time = stringResource(R.string.time_value, sharedUiState.time),
-                score = sharedUiState.currentScore,
-                sharedViewModel = sharedViewModel,
+                questionNumber = gameUiState.questionNumber,
+                time = gameUiState.time,
+                score = gameUiState.currentScore,
                 onPause = {
-                    sharedViewModel.pauseTimer()
+                    gameViewModel.pauseTimer()
                     isPause = !isPause
                 }
             )
@@ -44,19 +44,28 @@ fun GameScreen(
         paddingValues ->
 
         QuestionView(
-            word = sharedUiState.currentQuestion.word,
-            options = sharedUiState.currentQuestion.options,
-            canClick = sharedUiState.canClick,
-            onOptionSelected = { sharedViewModel.checkUserAnswer(it) },
-            answer = sharedUiState.currentQuestion.answer,
-            selected = sharedUiState.selected,
+            word = gameUiState.currentQuestion.word,
+            options = gameUiState.currentQuestion.options,
+            canClick = gameUiState.canClick,
+            onOptionSelected = {
+                gameViewModel.checkUserAnswer(
+                    option = it
+                )
+                sharedViewModel.updateAnswer(
+                    option = it,
+                    currentQuestion = gameUiState.currentQuestion,
+                    questionNumber = gameUiState.questionNumber
+                )
+                               },
+            answer = gameUiState.currentQuestion.answer,
+            selected = gameUiState.selected,
             modifier = Modifier.padding(paddingValues)
         )
 
         if (isPause) {
             PauseMenu(
                 onResumeQuiz = {
-                    sharedViewModel.resumeTimer()
+                    gameViewModel.resumeTimer()
                     isPause = !isPause },
                 onExit = {
                     isPause = !isPause
@@ -64,16 +73,16 @@ fun GameScreen(
                 },
                 onNewTrivia = {
                     isPause = !isPause
-                    sharedViewModel.resetGame()
+                    gameViewModel.resetGame()
                 }
             )
         }
         
-        if (sharedUiState.quizEnd) {
-            ResultScreen(
-                score = sharedUiState.currentScore,
-                answeredCorrectly = sharedUiState.answeredCorrectly,
-                replayTrivia = { sharedViewModel.resetGame() },
+        if (gameUiState.quizEnd) {
+            ResultDialog(
+                score = gameUiState.currentScore,
+                answeredCorrectly = gameUiState.answeredCorrectly,
+                replayTrivia = { gameViewModel.resetGame() },
                 revealAnswers = onReviewAnswer,
                 onExit = { onExitPauseMenu() })
         }
