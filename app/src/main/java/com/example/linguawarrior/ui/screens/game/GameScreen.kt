@@ -3,25 +3,20 @@ package com.example.linguawarrior.ui.screens.game
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.example.linguawarrior.ui.GameViewModel
-import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 import com.example.linguawarrior.ui.shared.components.QuestionView
 import com.example.linguawarrior.ui.shared.viewmodel.SharedUiEvent
 
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
-    sharedViewModel: SharedViewModel,
-    gameViewModel: GameViewModel,
     gameUiState: GameUiState,
-    onSharedUiEvent: (SharedUiEvent) -> Unit,
     onEvent : (GameUiEvent) -> Unit,
+    onSharedEvent : (SharedUiEvent) -> Unit,
     onExitPauseMenu : () -> Unit,
     onReviewAnswer : () -> Unit,
 ) {
@@ -53,12 +48,11 @@ fun GameScreen(
                 onEvent(
                     GameUiEvent.CheckUserAnswer(it)
                 )
-                sharedViewModel.updateAnswer(
+                onSharedEvent(SharedUiEvent.UpdateAnswer(
                     option = it,
                     currentQuestion = gameUiState.currentQuestion,
                     questionNumber = gameUiState.questionNumber
-                )
-                               },
+                )) },
             answer = gameUiState.currentQuestion.answer,
             selected = gameUiState.selected,
             modifier = Modifier.padding(paddingValues)
@@ -72,10 +66,12 @@ fun GameScreen(
                 onExit = {
                     isPause = false
                     onExitPauseMenu()
+                    onSharedEvent(SharedUiEvent.DiscardAnswers)
                 },
                 onNewTrivia = {
                     isPause = false
                     onEvent(GameUiEvent.UpdatQuestionSet)
+                    onSharedEvent(SharedUiEvent.DiscardAnswers)
                 }
             )
         }
@@ -84,9 +80,23 @@ fun GameScreen(
             ResultDialog(
                 score = gameUiState.currentScore,
                 answeredCorrectly = gameUiState.answeredCorrectly,
-                replayTrivia = { gameViewModel.resetGame() },
+                replayTrivia = {
+                    onEvent(GameUiEvent.UpdatQuestionSet)
+                    onSharedEvent(SharedUiEvent.DiscardAnswers)
+                               },
                 revealAnswers = onReviewAnswer,
-                onExit = { onExitPauseMenu() })
+                onExit = {
+                    onExitPauseMenu()
+                    onSharedEvent(SharedUiEvent.DiscardAnswers)
+                })
+        }
+
+        if (gameUiState.timerEnd) {
+            onSharedEvent(SharedUiEvent.UpdateAnswer(
+                option = "",
+                currentQuestion = gameUiState.currentQuestion,
+                questionNumber = gameUiState.questionNumber
+            ))
         }
     }
 }

@@ -23,6 +23,7 @@ class SharedViewModel : ViewModel() {
                 questionNumber = event.questionNumber
             )
             is SharedUiEvent.FetchQuestions -> fetchQuestions()
+            is SharedUiEvent.DiscardAnswers -> discardAnswers()
         }
     }
 
@@ -50,6 +51,14 @@ class SharedViewModel : ViewModel() {
             currentState.copy(
                 answerSet = updatedAnswers
             )
+        }
+    }
+
+    fun discardAnswers() {
+        _uiState.update {
+            currentState ->
+
+            currentState.copy(answerSet = listOf())
         }
     }
 }

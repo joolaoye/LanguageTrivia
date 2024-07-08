@@ -10,7 +10,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.linguawarrior.ui.screens.answers.RevealAnswersScreen
 import com.example.linguawarrior.ui.screens.game.GameScreen
-import com.example.linguawarrior.ui.screens.game.GameUiEvent
 import com.example.linguawarrior.ui.screens.start.StartScreen
 import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 
@@ -44,19 +43,18 @@ fun LinguaWarriorApp(
         composable(route =  LinguaWarriorScreen.Game.name) {
             val gameUiState by gameViewModel.uiState.collectAsState()
             GameScreen(
-                sharedViewModel = sharedViewModel,
-                gameViewModel = gameViewModel,
                 gameUiState = gameUiState,
                 onEvent = { event -> gameViewModel.onEvent(event) },
-                onSharedUiEvent = {event -> sharedViewModel.onEvent(event)},
+                onSharedEvent = {event -> sharedViewModel.onEvent(event)},
                 onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) },
                 onReviewAnswer = { navController.navigate(route = LinguaWarriorScreen.ReviewAnswers.name) }
             )
         }
 
         composable(route = LinguaWarriorScreen.ReviewAnswers.name) {
+            val sharedUiState by sharedViewModel.uiState.collectAsState()
             RevealAnswersScreen(
-                sharedViewModel = sharedViewModel,
+                sharedUiState = sharedUiState,
                 navigateUp = { navController.navigateUp() }
             )
         }

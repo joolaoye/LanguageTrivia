@@ -67,6 +67,13 @@ class GameViewModel : ViewModel() {
 
             override fun onFinish() {
                 checkUserAnswer()
+                _uiState.update {
+                    currentState ->
+
+                    currentState.copy(
+                        timerEnd = true
+                    )
+                }
             }
         }.start()
     }
@@ -96,7 +103,6 @@ class GameViewModel : ViewModel() {
                         currentState ->
 
                     currentState.copy(
-                        answeredWrong = true,
                         canClick = false
                     )
                 }
@@ -131,7 +137,7 @@ class GameViewModel : ViewModel() {
                     currentQuestion = currentQuestion,
                     questionNumber = questionNumber + 1,
                     selected = "",
-                    answeredWrong = false,
+                    timerEnd = false,
                     canClick = true
                 )
             }

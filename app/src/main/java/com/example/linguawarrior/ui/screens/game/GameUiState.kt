@@ -9,7 +9,7 @@ data class GameUiState(
     val time : Long = 0,
     val currentScore : Int = 0,
     val answeredCorrectly: Int = 0,
-    val answeredWrong : Boolean = false,
+    val timerEnd : Boolean = false,
     val canClick : Boolean = false,
     val quizEnd : Boolean = false,
     val selected : String = ""

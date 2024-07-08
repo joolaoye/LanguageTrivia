@@ -19,26 +19,22 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.extended
-import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 import com.example.linguawarrior.ui.shared.components.QuestionView
+import com.example.linguawarrior.ui.shared.viewmodel.SharedUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RevealAnswersScreen(
-    sharedViewModel: SharedViewModel,
-    navigateUp : () -> Unit,
+    sharedUiState: SharedUiState,
+    navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val sharedUiState by sharedViewModel.uiState.collectAsState()
-
     Scaffold(
         modifier = modifier,
         topBar = {
