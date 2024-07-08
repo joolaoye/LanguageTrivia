@@ -1,4 +1,4 @@
-package com.example.linguawarrior.ui
+package com.example.linguawarrior.ui.shared.viewmodel
 
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.model.Answer

@@ -1,4 +1,4 @@
-package com.example.linguawarrior.ui.components
+package com.example.linguawarrior.ui.shared.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

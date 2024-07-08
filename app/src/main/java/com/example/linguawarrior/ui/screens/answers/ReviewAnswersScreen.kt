@@ -27,8 +27,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.extended
-import com.example.linguawarrior.ui.SharedViewModel
-import com.example.linguawarrior.ui.components.QuestionView
+import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
+import com.example.linguawarrior.ui.shared.components.QuestionView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,13 +44,13 @@ fun RevealAnswersScreen(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "REVIEW ANSWERS")
+                    Text(text = stringResource(R.string.review_answers))
                 },
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = null
+                            contentDescription = stringResource(R.string.back)
                         )
                     }
                 }
@@ -104,7 +104,7 @@ fun AnswerView(
             
             if (answeredRight) {
                 Icon(
-                        imageVector = Icons.Rounded.Check,
+                    imageVector = Icons.Rounded.Check,
                     contentDescription = null,
                     tint = extended.success.color
                 )

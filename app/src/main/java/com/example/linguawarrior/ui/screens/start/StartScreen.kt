@@ -21,7 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.linguawarrior.data.quizOptions
-import com.example.linguawarrior.ui.SharedViewModel
+import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

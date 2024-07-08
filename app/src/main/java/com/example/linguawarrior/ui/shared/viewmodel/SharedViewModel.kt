@@ -1,20 +1,13 @@
-package com.example.linguawarrior.ui
+package com.example.linguawarrior.ui.shared.viewmodel
 
-import android.os.CountDownTimer
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.data.MAX_NO_OF_WORDS
-import com.example.linguawarrior.data.SCORE_INCREASE
 import com.example.linguawarrior.model.Answer
-import com.example.linguawarrior.ui.screens.game.GameUiState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(SharedUiState())

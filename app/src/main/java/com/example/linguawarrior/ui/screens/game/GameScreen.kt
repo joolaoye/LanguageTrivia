@@ -10,8 +10,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.linguawarrior.ui.GameViewModel
-import com.example.linguawarrior.ui.SharedViewModel
-import com.example.linguawarrior.ui.components.QuestionView
+import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
+import com.example.linguawarrior.ui.shared.components.QuestionView
 
 @Composable
 fun GameScreen(
