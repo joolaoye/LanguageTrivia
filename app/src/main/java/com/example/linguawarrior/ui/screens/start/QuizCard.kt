@@ -72,7 +72,10 @@ fun QuizCard(
 @Composable
 fun QuizCardLightThemePreviwew() {
     LinguaWarriorTheme {
-        QuizCard(onPlay = { /*TODO*/ }, language =  R.string.french)
+        QuizCard(
+            onPlay = {},
+            language =  R.string.french
+        )
     }
 }
 
@@ -82,6 +85,9 @@ fun QuizCardDarkThemePreviwew() {
     LinguaWarriorTheme(
         darkTheme = true
     ) {
-        QuizCard(onPlay = { /*TODO*/ }, language =  R.string.french)
+        QuizCard(
+            onPlay = {},
+            language =  R.string.french
+        )
     }
 }

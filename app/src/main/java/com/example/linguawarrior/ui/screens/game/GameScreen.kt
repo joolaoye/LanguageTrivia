@@ -8,6 +8,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.LinguaWarrior.model.Question
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.linguawarrior.ui.shared.components.QuestionView
 import com.example.linguawarrior.ui.shared.viewmodel.SharedUiEvent
 
@@ -93,10 +96,50 @@ fun GameScreen(
 
         if (gameUiState.timerEnd) {
             onSharedEvent(SharedUiEvent.UpdateAnswer(
-                option = "",
                 currentQuestion = gameUiState.currentQuestion,
                 questionNumber = gameUiState.questionNumber
             ))
         }
+    }
+}
+
+@Preview
+@Composable
+fun GameScreenLightThemePreview() {
+    LinguaWarriorTheme {
+        GameScreen(
+            gameUiState = GameUiState(
+                currentQuestion = Question(
+                    word = "chat",
+                    options = listOf("cat", "dog", "lion", "rat")
+                )
+            ),
+            onEvent = {},
+            onSharedEvent = {} ,
+            onExitPauseMenu = {},
+            onReviewAnswer = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun GameScreenDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
+        GameScreen(
+            gameUiState = GameUiState(
+                currentQuestion = Question(
+                    word = "chat",
+                    options = listOf("cat", "dog", "lion", "rat")
+                )
+            ),
+            onEvent = {},
+            onSharedEvent = {} ,
+            onExitPauseMenu = {},
+            onReviewAnswer = {}
+        )
+
     }
 }

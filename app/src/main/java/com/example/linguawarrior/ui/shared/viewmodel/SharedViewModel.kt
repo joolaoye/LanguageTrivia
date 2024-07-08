@@ -2,7 +2,6 @@ package com.example.linguawarrior.ui.shared.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.LinguaWarrior.model.Question
-import com.example.linguawarrior.data.MAX_NO_OF_WORDS
 import com.example.linguawarrior.model.Answer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

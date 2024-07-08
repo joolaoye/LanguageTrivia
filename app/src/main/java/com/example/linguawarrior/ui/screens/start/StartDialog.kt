@@ -72,7 +72,7 @@ fun StartDialog(
 @Composable
 fun StartDialogLightThemePreview() {
     LinguaWarriorTheme {
-        StartDialog(onConfirmation = { /*TODO*/ })
+        StartDialog(onConfirmation = {})
     }
 }
 
@@ -82,6 +82,6 @@ fun StartDialogDarkThemePreview() {
     LinguaWarriorTheme(
         darkTheme = true
     ) {
-        StartDialog(onConfirmation = { /*TODO*/ })
+        StartDialog(onConfirmation = {})
     }
 }

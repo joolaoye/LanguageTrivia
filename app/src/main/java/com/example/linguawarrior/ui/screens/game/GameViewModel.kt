@@ -1,7 +1,6 @@
 package com.example.linguawarrior.ui
 
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question

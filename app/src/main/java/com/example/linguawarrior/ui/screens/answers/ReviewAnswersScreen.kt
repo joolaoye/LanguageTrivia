@@ -23,8 +23,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.model.Question
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.LinguaWarrior.ui.theme.extended
+import com.example.linguawarrior.model.Answer
 import com.example.linguawarrior.ui.shared.components.QuestionView
 import com.example.linguawarrior.ui.shared.viewmodel.SharedUiState
 
@@ -114,5 +118,53 @@ fun AnswerView(
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun ReviewAnswersScreenLightThemePreview() {
+    LinguaWarriorTheme {
+        RevealAnswersScreen(
+            sharedUiState = SharedUiState(
+                answerSet = listOf(
+                    Answer(
+                        Question(
+                            word = "chat",
+                            options = listOf("cat", "dog", "lion", "rat"),
+                            answer = "cat"
+                        ),
+                        choice = "dog",
+                        questionNumber = 1
+                    )
+                )
+            ),
+            navigateUp = { }
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ReviewAnswersScreenDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
+        RevealAnswersScreen(
+            sharedUiState = SharedUiState(
+                answerSet = listOf(
+                    Answer(
+                        Question(
+                            word = "chat",
+                            options = listOf("cat", "dog", "lion", "rat"),
+                            answer = "cat"
+                        ),
+                        choice = "dog",
+                        questionNumber = 1
+                    )
+                )
+            ),
+            navigateUp = { }
+        )
     }
 }

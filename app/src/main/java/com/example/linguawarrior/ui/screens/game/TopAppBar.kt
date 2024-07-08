@@ -20,6 +20,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.example.LinguaWarrior.R
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.LinguaWarrior.ui.theme.extended
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,6 +96,34 @@ fun LabelAndTextColumn(
             text = text,
             style = MaterialTheme.typography.bodyLarge,
             color = textColor
+        )
+    }
+}
+
+@Preview
+@Composable
+fun TopBarLightThemePreview() {
+    LinguaWarriorTheme {
+        TopBar(
+            questionNumber = 1 ,
+            time = 5,
+            score = 0,
+            onPause = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun TopBarDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
+        TopBar(
+            questionNumber = 1 ,
+            time = 5,
+            score = 0,
+            onPause = {}
         )
     }
 }

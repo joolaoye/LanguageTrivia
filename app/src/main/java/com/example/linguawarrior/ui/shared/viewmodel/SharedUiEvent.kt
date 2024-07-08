@@ -6,7 +6,7 @@ import com.example.linguawarrior.ui.screens.game.GameUiEvent
 sealed class SharedUiEvent {
     data class UploadQuestionSet(val questionSet: List<Question>) : SharedUiEvent()
     data class UpdateAnswer(
-        val option : String,
+        val option : String = "",
         val currentQuestion: Question,
         val questionNumber : Int
     ) : SharedUiEvent()

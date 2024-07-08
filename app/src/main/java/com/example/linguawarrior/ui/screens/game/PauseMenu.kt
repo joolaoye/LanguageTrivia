@@ -77,12 +77,26 @@ fun PauseMenu(
 
 @Preview
 @Composable
-fun PauseMenuPreview() {
+fun PauseMenuLightThemePreview() {
     LinguaWarriorTheme {
         PauseMenu(
-            onResumeQuiz = { /*TODO*/ },
-            onExit = { /*TODO*/ },
-            onNewTrivia = { /*TODO*/ }
+            onResumeQuiz = {},
+            onExit = {},
+            onNewTrivia = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun PauseMenuDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
+        PauseMenu(
+            onResumeQuiz = {},
+            onExit = {},
+            onNewTrivia = {}
         )
     }
 }

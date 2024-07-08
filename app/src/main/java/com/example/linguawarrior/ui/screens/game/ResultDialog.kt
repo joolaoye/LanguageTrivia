@@ -122,8 +122,24 @@ fun ResultDialog(
 
 @Preview
 @Composable
-fun ResultScreenPreview() {
+fun ResultScreenLightThemePreview() {
     LinguaWarriorTheme {
+        ResultDialog(
+            score = 100,
+            answeredCorrectly = 1,
+            replayTrivia = {},
+            revealAnswers = {},
+            onExit = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun ResultScreenDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
         ResultDialog(
             score = 100,
             answeredCorrectly = 1,
