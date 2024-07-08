@@ -1,6 +1,7 @@
 package com.example.linguawarrior.ui
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class GameViewModel(
-    private val questions: List<Question>
+    private var questions: List<Question>
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState : StateFlow<GameUiState>
@@ -24,7 +25,7 @@ class GameViewModel(
     var questionNumber = 0
         private set
 
-    var currentQuestion = questions[questionNumber]
+    lateinit var currentQuestion : Question
         private set
     var remainingTime : Long = 10000
         private set
@@ -63,7 +64,7 @@ class GameViewModel(
                 currentState.copy(selected = option)
             }
 
-            if (option == currentQuestion.answer) {
+            if (option == currentQuestion?.answer) {
                 _uiState.update {
                         currentState ->
 
@@ -138,17 +139,14 @@ class GameViewModel(
     fun resetGame() {
         resetTimer()
         questionNumber = 0
-        _uiState.update {
-                currentState ->
-
-            currentState.copy(
-                currentScore = 0,
-                answeredCorrectly = 0,
-                answeredWrong = false,
-                quizEnd = false
-            )
-        }
+        _uiState.value = GameUiState()
         updateQuestion()
+    }
+
+    // FIXME: Redundant code
+    fun updateDataset(questions: List<Question>) {
+        this.questions = questions
+        resetGame()
     }
 
     init {

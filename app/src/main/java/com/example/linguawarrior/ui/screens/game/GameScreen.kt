@@ -73,7 +73,7 @@ fun GameScreen(
                 },
                 onNewTrivia = {
                     isPause = !isPause
-                    gameViewModel.resetGame()
+                    gameViewModel.updateDataset(sharedViewModel.fetchQuestions())
                 }
             )
         }
