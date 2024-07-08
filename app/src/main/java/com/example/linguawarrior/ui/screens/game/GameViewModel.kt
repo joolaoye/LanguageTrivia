@@ -57,6 +57,12 @@ class GameViewModel(
     fun checkUserAnswer(option: String = "") {
         viewModelScope.launch {
 
+            _uiState.update {
+                currentState ->
+
+                currentState.copy(selected = option)
+            }
+
             if (option == currentQuestion.answer) {
                 _uiState.update {
                         currentState ->
