@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.LinguaWarrior.model.Question
 import com.example.linguawarrior.data.MAX_NO_OF_WORDS
 import com.example.linguawarrior.data.SCORE_INCREASE
+import com.example.linguawarrior.ui.screens.game.GameUiEvent
 import com.example.linguawarrior.ui.screens.game.GameUiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,6 +32,16 @@ class GameViewModel(
         private set
 
     var timer : CountDownTimer? = null
+
+    fun onEvent(event : GameUiEvent) {
+        when(event) {
+            is GameUiEvent.CheckUserAnswer -> checkUserAnswer(event.option)
+            is GameUiEvent.ResumeTimer -> resumeTimer()
+            is GameUiEvent.ResetGame -> resetGame()
+            is GameUiEvent.UpdateDataset -> updateDataset(event.questions)
+            is GameUiEvent.PauseTimer -> pauseTimer()
+        }
+    }
 
 
     fun startTimer(timeInMs : Long) {

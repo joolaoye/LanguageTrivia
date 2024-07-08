@@ -1,6 +1,8 @@
 package com.example.linguawarrior.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -8,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.linguawarrior.ui.screens.answers.RevealAnswersScreen
 import com.example.linguawarrior.ui.screens.game.GameScreen
+import com.example.linguawarrior.ui.screens.game.GameUiEvent
 import com.example.linguawarrior.ui.screens.start.StartScreen
 import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 
@@ -40,9 +43,12 @@ fun LinguaWarriorApp(
         }
 
         composable(route =  LinguaWarriorScreen.Game.name) {
+            val gameUiState by gameViewModel.uiState.collectAsState()
             GameScreen(
                 sharedViewModel = sharedViewModel,
                 gameViewModel = gameViewModel,
+                gameUiState = gameUiState,
+                onEvent = { event -> gameViewModel.onEvent(event) },
                 onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) },
                 onReviewAnswer = { navController.navigate(route = LinguaWarriorScreen.ReviewAnswers.name) }
             )

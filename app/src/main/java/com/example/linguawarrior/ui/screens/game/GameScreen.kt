@@ -18,11 +18,11 @@ fun GameScreen(
     modifier: Modifier = Modifier,
     sharedViewModel: SharedViewModel,
     gameViewModel: GameViewModel,
+    gameUiState: GameUiState,
+    onEvent : (GameUiEvent) -> Unit,
     onExitPauseMenu : () -> Unit,
     onReviewAnswer : () -> Unit,
 ) {
-    val gameUiState by gameViewModel.uiState.collectAsState()
-
     var isPause by rememberSaveable {
         mutableStateOf(false)
     }
@@ -35,7 +35,7 @@ fun GameScreen(
                 time = gameUiState.time,
                 score = gameUiState.currentScore,
                 onPause = {
-                    gameViewModel.pauseTimer()
+                    onEvent(GameUiEvent.PauseTimer)
                     isPause = !isPause
                 }
             )
@@ -48,8 +48,8 @@ fun GameScreen(
             options = gameUiState.currentQuestion.options,
             canClick = gameUiState.canClick,
             onOptionSelected = {
-                gameViewModel.checkUserAnswer(
-                    option = it
+                onEvent(
+                    GameUiEvent.CheckUserAnswer(it)
                 )
                 sharedViewModel.updateAnswer(
                     option = it,
@@ -65,7 +65,7 @@ fun GameScreen(
         if (isPause) {
             PauseMenu(
                 onResumeQuiz = {
-                    gameViewModel.resumeTimer()
+                    onEvent(GameUiEvent.ResumeTimer)
                     isPause = false },
                 onExit = {
                     isPause = false
@@ -73,7 +73,7 @@ fun GameScreen(
                 },
                 onNewTrivia = {
                     isPause = false
-                    gameViewModel.updateDataset(sharedViewModel.fetchQuestions())
+                    onEvent(GameUiEvent.UpdateDataset(sharedViewModel.fetchQuestions()))
                 }
             )
         }
