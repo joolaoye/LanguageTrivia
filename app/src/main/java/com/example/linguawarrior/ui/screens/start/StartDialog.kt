@@ -15,7 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,5 +65,23 @@ fun StartDialog(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun StartDialogLightThemePreview() {
+    LinguaWarriorTheme {
+        StartDialog(onConfirmation = { /*TODO*/ })
+    }
+}
+
+@Preview
+@Composable
+fun StartDialogDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
+        StartDialog(onConfirmation = { /*TODO*/ })
     }
 }

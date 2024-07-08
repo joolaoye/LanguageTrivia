@@ -70,8 +70,18 @@ fun QuizCard(
 
 @Preview
 @Composable
-fun QuizCardPreviwew() {
+fun QuizCardLightThemePreviwew() {
     LinguaWarriorTheme {
+        QuizCard(onPlay = { /*TODO*/ }, language =  R.string.french)
+    }
+}
+
+@Preview
+@Composable
+fun QuizCardDarkThemePreviwew() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
         QuizCard(onPlay = { /*TODO*/ }, language =  R.string.french)
     }
 }

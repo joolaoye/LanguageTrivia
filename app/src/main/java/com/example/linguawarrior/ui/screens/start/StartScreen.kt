@@ -78,8 +78,21 @@ fun StartScreen(
 
 @Preview
 @Composable
-fun StartScreenPreview() {
+fun StartScreenLightThemePreview() {
     LinguaWarriorTheme {
+        StartScreen(
+            sharedViewModel = viewModel(),
+            onConfirmation = {}
+        )
+    }
+}
+
+@Preview
+@Composable
+fun StartScreenDarkThemePreview() {
+    LinguaWarriorTheme(
+        darkTheme = true
+    ) {
         StartScreen(
             sharedViewModel = viewModel(),
             onConfirmation = {}

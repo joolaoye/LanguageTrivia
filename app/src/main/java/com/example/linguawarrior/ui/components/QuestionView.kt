@@ -16,7 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.LinguaWarrior.R
+import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.LinguaWarrior.ui.theme.extended
 
 @Composable
@@ -119,6 +121,43 @@ fun SelectOption(
                 text = option,
                 style = MaterialTheme.typography.bodyMedium,
                 color = textColor
+            )
+        }
+    }
+}
+
+
+@Preview
+@Composable
+fun QuestionViewLightThemePreview() {
+    LinguaWarriorTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            QuestionView(
+                word = "chat",
+                options = listOf("cat", "dog", "lion", "rat"),
+                canClick = true,
+                answer = "",
+                selected = ""
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun QuestionViewDarkThemePreview() {
+    LinguaWarriorTheme(darkTheme = true) {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            QuestionView(
+                word = "chat",
+                options = listOf("cat", "dog", "lion", "rat"),
+                canClick = true,
+                answer = "",
+                selected = ""
             )
         }
     }
