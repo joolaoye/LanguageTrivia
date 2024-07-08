@@ -66,13 +66,13 @@ fun GameScreen(
             PauseMenu(
                 onResumeQuiz = {
                     gameViewModel.resumeTimer()
-                    isPause = !isPause },
+                    isPause = false },
                 onExit = {
-                    isPause = !isPause
+                    isPause = false
                     onExitPauseMenu()
                 },
                 onNewTrivia = {
-                    isPause = !isPause
+                    isPause = false
                     gameViewModel.updateDataset(sharedViewModel.fetchQuestions())
                 }
             )
