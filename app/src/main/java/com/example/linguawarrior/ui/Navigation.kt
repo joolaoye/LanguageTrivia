@@ -21,11 +21,10 @@ enum class LinguaWarriorScreen() {
     ReviewAnswers
 }
 
-lateinit var gameViewModel: GameViewModel
-
 @Composable
 fun LinguaWarriorApp(
     sharedViewModel: SharedViewModel = viewModel(),
+    gameViewModel : GameViewModel = viewModel(),
     navController : NavHostController = rememberNavController()
 ) {
     NavHost(
@@ -34,9 +33,9 @@ fun LinguaWarriorApp(
     ) {
         composable(route = LinguaWarriorScreen.Start.name ) {
             StartScreen(
-                sharedViewModel = sharedViewModel,
+                onSharedEvent = {event -> sharedViewModel.onEvent(event)},
                 onConfirmation = {
-                    gameViewModel = GameViewModel(questions = sharedViewModel.fetchQuestions())
+                    gameViewModel.initializeGame(questionDataset = sharedViewModel.fetchQuestions())
                     navController.navigate(route = LinguaWarriorScreen.Game.name)
                 }
             )
@@ -49,6 +48,7 @@ fun LinguaWarriorApp(
                 gameViewModel = gameViewModel,
                 gameUiState = gameUiState,
                 onEvent = { event -> gameViewModel.onEvent(event) },
+                onSharedUiEvent = {event -> sharedViewModel.onEvent(event)},
                 onExitPauseMenu = { navController.navigate(route = LinguaWarriorScreen.Start.name) },
                 onReviewAnswer = { navController.navigate(route = LinguaWarriorScreen.ReviewAnswers.name) }
             )

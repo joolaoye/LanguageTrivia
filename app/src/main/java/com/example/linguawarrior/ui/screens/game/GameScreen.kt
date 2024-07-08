@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import com.example.linguawarrior.ui.GameViewModel
 import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 import com.example.linguawarrior.ui.shared.components.QuestionView
+import com.example.linguawarrior.ui.shared.viewmodel.SharedUiEvent
 
 @Composable
 fun GameScreen(
@@ -19,6 +20,7 @@ fun GameScreen(
     sharedViewModel: SharedViewModel,
     gameViewModel: GameViewModel,
     gameUiState: GameUiState,
+    onSharedUiEvent: (SharedUiEvent) -> Unit,
     onEvent : (GameUiEvent) -> Unit,
     onExitPauseMenu : () -> Unit,
     onReviewAnswer : () -> Unit,
@@ -73,7 +75,7 @@ fun GameScreen(
                 },
                 onNewTrivia = {
                     isPause = false
-                    onEvent(GameUiEvent.UpdateDataset(sharedViewModel.fetchQuestions()))
+                    onEvent(GameUiEvent.UpdatQuestionSet)
                 }
             )
         }

@@ -1,6 +1,5 @@
 package com.example.linguawarrior.ui.screens.game
 
-import android.app.Dialog
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -93,8 +92,8 @@ fun ResultDialog(
                         TextButton(onClick = {
                             if (showDialog) {
                                 showDialog = false
-                                revealAnswers()
                             }
+                            revealAnswers()
                         }) {
                             Text(
                                 text = stringResource(R.string.review_answers),
@@ -102,7 +101,12 @@ fun ResultDialog(
                             )
                         }
 
-                        TextButton(onClick = onExit) {
+                        TextButton(onClick = {
+                            if (showDialog) {
+                                showDialog = false
+                            }
+                            onExit()
+                        }) {
                             Text(
                                 text = stringResource(R.string.exit),
                                 style = MaterialTheme.typography.bodyLarge

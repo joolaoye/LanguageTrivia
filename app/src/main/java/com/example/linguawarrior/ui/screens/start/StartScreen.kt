@@ -21,12 +21,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.LinguaWarrior.R
 import com.example.LinguaWarrior.ui.theme.LinguaWarriorTheme
 import com.example.linguawarrior.data.quizOptions
+import com.example.linguawarrior.ui.shared.viewmodel.SharedUiEvent
 import com.example.linguawarrior.ui.shared.viewmodel.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StartScreen(
-    sharedViewModel: SharedViewModel,
+    onSharedEvent : (SharedUiEvent) -> Unit,
     onConfirmation: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -53,7 +54,7 @@ fun StartScreen(
                 QuizCard(
                     language = it.language,
                     onPlay = {
-                        sharedViewModel.uploadQuestionSet(it.dataset)
+                        onSharedEvent(SharedUiEvent.UploadQuestionSet(it.dataset))
                         displayDialog = !displayDialog
                              },
                     modifier =  Modifier
@@ -81,7 +82,7 @@ fun StartScreen(
 fun StartScreenLightThemePreview() {
     LinguaWarriorTheme {
         StartScreen(
-            sharedViewModel = viewModel(),
+            onSharedEvent = {},
             onConfirmation = {}
         )
     }
@@ -94,7 +95,7 @@ fun StartScreenDarkThemePreview() {
         darkTheme = true
     ) {
         StartScreen(
-            sharedViewModel = viewModel(),
+            onSharedEvent = {},
             onConfirmation = {}
         )
     }

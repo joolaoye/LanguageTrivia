@@ -14,12 +14,24 @@ class SharedViewModel : ViewModel() {
     val uiState : StateFlow<SharedUiState>
         get() = _uiState.asStateFlow()
 
+    fun onEvent(event : SharedUiEvent) {
+        when(event) {
+            is SharedUiEvent.UploadQuestionSet -> uploadQuestionSet(event.questionSet)
+            is SharedUiEvent.UpdateAnswer -> updateAnswer(
+                option = event.option,
+                currentQuestion = event.currentQuestion,
+                questionNumber = event.questionNumber
+            )
+            is SharedUiEvent.FetchQuestions -> fetchQuestions()
+        }
+    }
+
     fun uploadQuestionSet(questionSet : List<Question>) {
         _uiState.value = SharedUiState(questionSet = questionSet)
     }
 
     fun fetchQuestions() : List<Question> {
-        return _uiState.value.questionSet.shuffled().take(MAX_NO_OF_WORDS)
+        return _uiState.value.questionSet
     }
 
     fun updateAnswer(option: String = "", currentQuestion: Question, questionNumber : Int) {

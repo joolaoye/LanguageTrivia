@@ -16,29 +16,35 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class GameViewModel(
-    private var questions: List<Question>
-) : ViewModel() {
+class GameViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState : StateFlow<GameUiState>
         get() = _uiState.asStateFlow()
 
-    var questionNumber = 0
-        private set
+    private var initialized = false
+    private var questionDataset: List<Question> = emptyList()
+    private var questions: List<Question> = emptyList()
+    private var questionNumber = 0
+    private lateinit var currentQuestion: Question
+    private var remainingTime: Long = 10000
+    private var timer: CountDownTimer? = null
 
-    lateinit var currentQuestion : Question
-        private set
-    var remainingTime : Long = 10000
-        private set
-
-    var timer : CountDownTimer? = null
+    fun initializeGame(questionDataset: List<Question>) {
+        if (initialized) {
+            return
+        } else {
+            initialized = true
+            this.questionDataset = questionDataset
+            updateQuestionSet()
+        }
+    }
 
     fun onEvent(event : GameUiEvent) {
         when(event) {
             is GameUiEvent.CheckUserAnswer -> checkUserAnswer(event.option)
             is GameUiEvent.ResumeTimer -> resumeTimer()
             is GameUiEvent.ResetGame -> resetGame()
-            is GameUiEvent.UpdateDataset -> updateDataset(event.questions)
+            is GameUiEvent.UpdatQuestionSet -> updateQuestionSet()
             is GameUiEvent.PauseTimer -> pauseTimer()
         }
     }
@@ -154,13 +160,16 @@ class GameViewModel(
         updateQuestion()
     }
 
-    // FIXME: Redundant code
-    fun updateDataset(questions: List<Question>) {
-        this.questions = questions
-        resetGame()
+    fun updateQuestionSet() {
+        if (initialized) {
+            questions = questionDataset.shuffled().take(MAX_NO_OF_WORDS)
+            resetGame()
+        } else {
+            return
+        }
     }
 
     init {
-        resetGame()
+        updateQuestionSet()
     }
 }
